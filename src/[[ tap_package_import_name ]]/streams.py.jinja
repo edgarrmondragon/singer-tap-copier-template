@@ -1,0 +1,97 @@
+[%- set base_stream = tap_source_id + 'Stream' -%]
+
+"""Stream type classes for [[ tap_id ]]."""
+
+from singer_sdk import typing as th
+
+from [[ tap_package_import_name ]].client import [[ base_stream ]]
+
+# TODO: - Override `UsersStream` and `GroupsStream` with your own stream definition.
+#       - Copy-paste as many times as needed to create multiple stream types.
+
+
+class Users([[ base_stream ]]):
+    """Users stream."""
+
+    name = "users"
+    [%- if tap_stream_type == "REST" %]
+    path = "/users"
+    [%- endif %]
+    primary_keys = ["id"]
+    replication_key = None
+
+    schema = th.PropertiesList(
+        th.Property(
+            "id",
+            th.StringType,
+            description="The user's system ID",
+        ),
+        th.Property(
+            "age",
+            th.IntegerType,
+            description="The user's age in years",
+        ),
+        th.Property(
+            "email",
+            th.StringType,
+            description="The user's email address",
+        ),
+        th.Property(
+            "address",
+            th.ObjectType(
+                th.Property("street", th.StringType),
+                th.Property("city", th.StringType),
+                th.Property(
+                    "state",
+                    th.StringType,
+                    description="State name in ISO 3166-2 format",
+                ),
+                th.Property("zip", th.StringType),
+            ),
+        ),
+    ).to_dict()
+
+    [%- if tap_stream_type == "GraphQL" %]
+
+    graphql_query = """
+        users {
+            id
+            age
+            email
+            address {
+                street
+                city
+                state
+                zip
+            }
+        }
+        """
+    [%- endif %]
+
+
+class Groups([[ base_stream ]]):
+    """Groups stream."""
+
+    name = "groups"
+    [%- if tap_stream_type == "REST" %]
+    path = "/groups"
+    [%- endif %]
+    primary_keys = ["id"]
+    replication_key = "modified"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("modified", th.DateTimeType),
+    ).to_dict()
+
+    [%- if tap_stream_type == "GraphQL" %]
+
+    graphql_query = """
+        groups {
+            name
+            id
+            modified
+        }
+        """
+    [%- endif %]

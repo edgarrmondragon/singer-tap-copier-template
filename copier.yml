@@ -1,0 +1,100 @@
+# Template configuration
+# ---------------------------------------------------------------------------------------------
+_templates_suffix: .jinja
+_subdirectory: src
+_tasks:
+- "poetry lock"
+- "poetry install"
+
+# Prompts
+# ---------------------------------------------------------------------------------------------
+tap_source_name:
+  type: str
+  help: The name of the source for the Singer Tap
+  default: "My Source"
+
+tap_source_description:
+  type: str
+  help: Description of the data source
+  default: "My data source"
+
+tap_source_id:
+  type: str
+  help: A CamelCase identifier for the source
+  default: "[[ tap_source_name|replace('-', '')|replace('_', '')|replace(' ', '') ]]"
+
+tap_id:
+  type: str
+  help: An identifier for this Singer Tap
+  default: "tap-[[ tap_source_name|lower|replace('-', '')|replace('_', '')|replace(' ', '') ]]"
+
+tap_package_distribution_name:
+  type: str
+  help: Package name when installed
+  default: "[[ tap_id ]]"
+
+tap_package_import_name:
+  type: str
+  help: Your Python package import name (for `import NAME` in Python code)
+  default: "[[ tap_id|replace('-', '_') ]]"
+
+tap_package_command_line_name:
+  type: str
+  help: Your CLI name
+  default: "[[ tap_id ]]"
+
+tap_stream_type:
+  type: str
+  help: Type of source for each stream in the tap (REST API, GraphQL query, etc.)
+  choices:
+  - REST
+  - GraphQL
+
+tap_auth_method:
+  type: str
+  help: Authentication method used for the API
+  choices:
+  - API Key
+  - Bearer Token
+  - Basic Auth
+  - OAuth2
+  - JWT
+  - Custom or N/A
+  
+author_fullname:
+  type: str
+  help: Your full name
+  default: "John Doe"
+
+author_email:
+  type: str
+  help: Your email
+  default: "john@example.com"
+
+author_username:
+  type: str
+  help: Your username (e.g. on GitHub)
+  default: johndoewashere
+
+repository_provider:
+  type: str
+  help: Your repository provider
+  default: github.com
+  choices:
+  - github.com
+  - gitlab.com
+
+repository_namespace:
+  type: str
+  help: Your repository namespace
+  default: "[[ author_username ]]"
+
+repository_name:
+  type: str
+  help: Your repository name
+  default: "[[ tap_package_distribution_name ]]"
+
+python_main_version:
+  type: str
+  help: Main Python version supported by this project
+  default: "3.10"

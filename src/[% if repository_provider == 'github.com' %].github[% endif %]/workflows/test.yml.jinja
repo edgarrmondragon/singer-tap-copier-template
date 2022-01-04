@@ -1,0 +1,34 @@
+name: Test [[ tap_id ]]
+
+on: [push]
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    env:
+      SETUPTOOLS_USE_DISTUTILS: stdlib
+    strategy:
+      matrix:
+        python-version: [" [[ python_main_version ]] "]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: 1.1.12
+
+    - name: Install dependencies
+      run: |
+        poetry install
+
+    - name: Run lint command from tox.ini
+      run: |
+        poetry run tox -e lint

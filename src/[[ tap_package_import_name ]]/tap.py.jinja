@@ -1,0 +1,46 @@
+"""[[ tap_source_name ]] tap class."""
+
+from typing import List
+
+from singer_sdk import Stream, Tap
+from singer_sdk import typing as th
+
+# TODO: Import your custom stream types here:
+from [[ tap_package_import_name ]].streams import Groups, Users
+
+# TODO: Compile a list of custom stream types here
+#       OR rewrite discover_streams() below with your custom logic.
+STREAM_TYPES = [
+    Users,
+    Groups,
+]
+
+
+class Tap[[ tap_source_id ]](Tap):
+    """Singer tap for [[ tap_source_name ]]."""
+
+    name = "[[ tap_id ]]"
+
+    # TODO: Update this section with the actual config values you expect:
+    config_jsonschema = th.PropertiesList(
+        th.Property(
+            "username",
+            th.StringType,
+            required=True,
+            description="Username in [[ tap_source_name ]]",
+        ),
+        th.Property(
+            "password",
+            th.StringType,
+            required=True,
+            description="Password in [[ tap_source_name ]]",
+        ),
+    ).to_dict()
+
+    def discover_streams(self) -> List[Stream]:
+        """Return a list of discovered streams.
+
+        Returns:
+            A list of [[ tap_source_name ]] streams.
+        """
+        return [stream_class(tap=self) for stream_class in STREAM_TYPES]

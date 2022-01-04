@@ -1,0 +1,57 @@
+[%- set base_stream = tap_source_id + 'Stream' -%]
+[%- set authenticator = tap_source_id + 'Authenticator' -%]
+
+"""GraphQL client handling, including [[ base_stream ]] base class."""
+
+from typing import Iterable
+
+import requests
+from singer_sdk.streams import [[ tap_stream_type ]]Stream
+
+[%- if tap_auth_method in ("OAuth2", "JWT") %]
+
+from [[ tap_package_import_name ]].auth import [[ authenticator ]]
+[%- endif %]
+
+
+class [[ base_stream ]]([[ tap_stream_type ]]Stream):
+    """[[ tap_source_name ]] stream class."""
+
+    url_base = "https://api.mysample.com"
+
+[%- if tap_auth_method in ("OAuth2", "JWT") %]
+
+    @property
+    def authenticator(self) -> [[ authenticator ]]:
+        """Get an authenticator object.
+
+        Returns:
+            The authenticator instance for this GraphQL stream.
+        """
+        return [[ authenticator ]].create_for_stream(self)
+
+[%- endif %]
+
+    @property
+    def http_headers(self) -> dict:
+        """Return the http headers needed.
+
+        Returns:
+            A dictionary of HTTP headers.
+        """
+        headers = {}
+        headers["User-Agent"] = f"{self.tap_name}/{self._tap.plugin_version}"
+        return headers
+
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        """Parse the response and return an iterator of result rows.
+
+        Args:
+            response: API response.
+
+        Yields:
+            Raw stream records.
+        """
+        # TODO: Parse response body and return a set of records.
+        resp_json = response.json()
+        yield from resp_json.get("<TODO>")

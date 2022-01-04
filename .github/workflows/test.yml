@@ -1,0 +1,46 @@
+name: Test template output
+
+on: [push]
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+        - "3.10"
+        stream_type:
+        - REST
+        - GraphQL
+        auth_method:
+        - JWT
+        - API Key
+        - Bearer Token
+        - Basic Auth
+        - OAuth2
+        - Custom or N/A
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install copier
+      run: pip install copier==5.1.0
+
+    - name: Create template
+      run: |
+        mkdir ../output-dir
+        copier . ../output-dir -d "tap_stream_type=${{ matrix.stream_type }}" -d "tap_auth_method=${{ matrix.auth_method }}"
+
+    - name: Install dependencies
+      run: |
+        pip install tox==3.24.4
+
+    - name: Run lint command from tox.ini
+      run: |
+        tox -e lint
