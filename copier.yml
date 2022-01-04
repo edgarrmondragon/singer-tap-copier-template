@@ -60,7 +60,7 @@ tap_auth_method:
   - OAuth2
   - JWT
   - Custom or N/A
-  
+
 author_fullname:
   type: str
   help: Your full name
