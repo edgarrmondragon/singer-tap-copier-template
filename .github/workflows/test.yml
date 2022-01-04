@@ -48,4 +48,5 @@ jobs:
 
     - name: Run lint command from tox.ini
       run: |
+        cd ../output-dir
         tox -e lint
