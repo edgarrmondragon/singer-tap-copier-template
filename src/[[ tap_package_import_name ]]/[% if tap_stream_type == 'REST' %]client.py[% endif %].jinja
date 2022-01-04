@@ -10,10 +10,11 @@
 
 from typing import Any, Dict, Optional
 
-[% if tap_auth_method in builtin_auth -%]
+from singer_sdk import [[ tap_stream_type ]]Stream
+
+[%- if tap_auth_method in builtin_auth %]
 from singer_sdk.authenticators import [[ builtin_auth[tap_auth_method] ]]
 [%- endif %]
-from singer_sdk.streams import [[ tap_stream_type ]]Stream
 
 [%- if tap_auth_method in ("OAuth2", "JWT") %]
 
@@ -65,9 +66,10 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
         Returns:
             The authenticator instance for this REST stream.
         """
+        api_key: str = self.config["api_key"]
         return BearerTokenAuthenticator.create_for_stream(
             self,
-            token=self.config.get("api_key"),
+            token=api_key,
         )
 
 [%- elif tap_auth_method == "Basic Auth" %]
@@ -79,10 +81,13 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
         Returns:
             The authenticator instance for this REST stream.
         """
+        username = self.config["username"]
+        password = self.config["password"]
+
         return BasicAuthenticator.create_for_stream(
             self,
-            username=self.config.get("username"),
-            password=self.config.get("password"),
+            username=username,
+            password=password,
         )
 
 [%- endif %]
