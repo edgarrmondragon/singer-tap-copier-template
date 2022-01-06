@@ -24,6 +24,28 @@ class Tap[[ tap_source_id ]](Tap):
 
     # TODO: Update this section with the actual config values you expect:
     config_jsonschema = th.PropertiesList(
+[%- if tap_auth_method in ("OAuth2", "JWT") %]
+        th.Property(
+            "client_id",
+            th.StringType,
+            required=True,
+            description="Client ID to authenticate in [[ tap_source_name ]]",
+        ),
+[%- elif tap_auth_method == "API Key" %]
+        th.Property(
+            "api_key",
+            th.StringType,
+            required=True,
+            description="API Key for [[ tap_source_name ]]",
+        ),
+[%- elif tap_auth_method == "Bearer Token" %]
+        th.Property(
+            "token",
+            th.StringType,
+            required=True,
+            description="API Token for [[ tap_source_name ]]",
+        ),
+[%- elif tap_auth_method == ("OAuth2", "JWT", "Basic Auth") %]
         th.Property(
             "username",
             th.StringType,
@@ -36,6 +58,7 @@ class Tap[[ tap_source_id ]](Tap):
             required=True,
             description="Password in [[ tap_source_name ]]",
         ),
+[% -endif %]
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:

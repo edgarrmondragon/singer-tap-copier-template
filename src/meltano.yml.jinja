@@ -15,10 +15,32 @@ plugins:
     - discover
     settings:
     # TODO: To configure using Meltano, declare settings and their types here:
+[%- if tap_auth_method in ("OAuth2", "JWT") %]
+    - name: client_id
+      kind: password
+      label: Client ID
+      description: Client ID to authenticate in [[ tap_source_name ]]
+[%- elif tap_auth_method == "API Key" %]
+    - name: api_key
+      kind: password
+      label: API Key
+      description API Key for [[ tap_source_name ]]
+[%- elif tap_auth_method == "Bearer Token" %]
+    - name: token
+      kind: password
+      label: API Token
+      description: API Token for [[ tap_source_name ]]
+[%- elif tap_auth_method == ("OAuth2", "JWT", "Basic Auth") %]
     - name: username
+      kind: string
+      label: Username
+      description: Username in [[ tap_source_name ]]
     - name: password
       kind: password
-  loaders:
+      label: Password
+      description: Password in [[ tap_source_name ]]
+[% -endif %]
+ loaders:
   - name: target-jsonl
     variant: andyh1203
     pip_url: target-jsonl

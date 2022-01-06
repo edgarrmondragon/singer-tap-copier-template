@@ -66,10 +66,10 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
         Returns:
             The authenticator instance for this REST stream.
         """
-        api_key: str = self.config["api_key"]
+        token: str = self.config["token"]
         return BearerTokenAuthenticator.create_for_stream(
             self,
-            token=api_key,
+            token=token,
         )
 
 [%- elif tap_auth_method == "Basic Auth" %]
