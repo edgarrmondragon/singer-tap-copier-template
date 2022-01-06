@@ -3,8 +3,8 @@
 _templates_suffix: .jinja
 _subdirectory: src
 _tasks:
-- "poetry lock"
 - "poetry env use [[ python_main_version ]]"
+- "poetry lock"
 - "poetry install"
 
 # Prompts
