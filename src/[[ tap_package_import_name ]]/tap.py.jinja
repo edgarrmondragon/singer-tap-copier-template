@@ -58,7 +58,7 @@ class Tap[[ tap_source_id ]](Tap):
             required=True,
             description="Password in [[ tap_source_name ]]",
         ),
-[% -endif %]
+[%- endif %]
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:
