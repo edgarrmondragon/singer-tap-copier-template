@@ -45,7 +45,7 @@ class Tap[[ tap_source_id ]](Tap):
             required=True,
             description="API Token for [[ tap_source_name ]]",
         ),
-[%- elif tap_auth_method == ("OAuth2", "JWT", "Basic Auth") %]
+[%- elif tap_auth_method in ("OAuth2", "JWT", "Basic Auth") %]
         th.Property(
             "username",
             th.StringType,
@@ -59,6 +59,11 @@ class Tap[[ tap_source_id ]](Tap):
             description="Password in [[ tap_source_name ]]",
         ),
 [%- endif %]
+        th.Property(
+            "start_date",
+            th.DateTimeType,
+            description="Earliest datetime to get data from",
+        ),
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:

@@ -40,6 +40,12 @@ plugins:
       label: Password
       description: Password in [[ tap_source_name ]]
 [%- endif %]
+    - name: start_date
+      kind: date_iso8601
+      label: Start Date
+      description: Earliest datetime to get data from
+    config:
+      start_date: "[[ now() ]]"
  loaders:
   - name: target-jsonl
     variant: andyh1203
