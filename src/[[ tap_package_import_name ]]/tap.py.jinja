@@ -4,13 +4,14 @@ from typing import List
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
+from singer_sdk.streams import [[ tap_stream_type ]]Stream
 
 # TODO: Import your custom stream types here:
 from [[ tap_package_import_name ]].streams import Groups, Users
 
 # TODO: Compile a list of custom stream types here
 #       OR rewrite discover_streams() below with your custom logic.
-STREAM_TYPES = [
+STREAM_TYPES: List[% raw -%] [ [%- endraw -%] [[ tap_stream_type ]]Stream [%- raw -%] ] [%- endraw %] = [
     Users,
     Groups,
 ]
