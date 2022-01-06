@@ -9,7 +9,7 @@ jobs:
       SETUPTOOLS_USE_DISTUTILS: stdlib
     strategy:
       matrix:
-        python-version: [" [[ python_main_version ]] "]
+        python-version: [" [[- python_main_version -]] "]
 
     steps:
     - name: Checkout code
