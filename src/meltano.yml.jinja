@@ -45,7 +45,7 @@ plugins:
       label: Start Date
       description: Earliest datetime to get data from
     config:
-      start_date: "[[ now() ]]"
+      start_date: "[[ now().date() ]]"
  loaders:
   - name: target-jsonl
     variant: andyh1203
