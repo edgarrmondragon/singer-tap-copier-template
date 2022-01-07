@@ -2,9 +2,9 @@
 [%- if tap_auth_method in ("OAuth2", "JWT") %]
   "client_id": "TODO",
 [%- elif tap_auth_method == "API Key" %]
-  "api_key": "TODO"
+  "api_key": "TODO",
 [%- elif tap_auth_method == "Bearer Token" %]
-  "token": "TODO"
+  "token": "TODO",
 [%- elif tap_auth_method == ("OAuth2", "JWT", "Basic Auth") %]
   "username": "TODO",
   "password": "TODO",
