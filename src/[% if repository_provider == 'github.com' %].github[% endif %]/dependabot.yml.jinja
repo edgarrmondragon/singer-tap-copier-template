@@ -9,7 +9,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-      time: "10:23"
+      time: "[[ now().strftime('%H:%M') ]]"
       timezone: "America/Mexico_City"
     reviewers:
       - "[[ author_username ]]"
