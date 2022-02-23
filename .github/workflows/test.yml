@@ -42,7 +42,7 @@ jobs:
 
     - name: Install copier
       run: |
-        pipx install --constraint=.github/workflows/constraints.txt copier
+        pipx install --pip-args=--constraint=.github/workflows/constraints.txt copier
         copier --version
 
     - name: Create template
@@ -52,7 +52,7 @@ jobs:
 
     - name: Install tox
       run: |
-        pipx install --constraint=.github/workflows/constraints.txt tox
+        pipx install --pip-args=--constraint=.github/workflows/constraints.txt tox
         tox --version
 
     - name: Run lint command from tox.ini
