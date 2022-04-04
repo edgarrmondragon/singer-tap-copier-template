@@ -14,3 +14,21 @@ updates:
       interval: weekly
     reviewers:
       - "edgarrmondragon"
+
+# Template
+  - package-ecosystem: pip
+    directory: "/src"
+    schedule:
+      interval: weekly
+    reviewers:
+      - "edgarrmondragon"
+    labels:
+      - "dependencies"
+  - package-ecosystem: pip
+    directory: "/src/[% if repository_provider == 'github.com' %].github[% endif %]/workflows"
+    schedule:
+      interval: weekly
+    reviewers:
+      - "edgarrmondragon"
+    labels:
+      - "dependencies"
