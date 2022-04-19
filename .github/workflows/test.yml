@@ -56,7 +56,7 @@ jobs:
       run: >
         copier . ../output-dir
         --defaults
-        -d "python_main_version=${{ matrix.python-version }}"
+        -d "python_main_version='${{ matrix.python-version }}'"
         -d "tap_stream_type=${{ matrix.stream_type }}"
         -d "tap_auth_method=${{ matrix.auth_method }}"
 
