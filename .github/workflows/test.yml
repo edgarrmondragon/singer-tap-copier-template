@@ -48,7 +48,7 @@ jobs:
     - name: Create template
       run: |
         mkdir ../output-dir
-        copier . ../output-dir -d "tap_stream_type=${{ matrix.stream_type }}" -d "tap_auth_method=${{ matrix.auth_method }}"
+        copier . ../output-dir --defaults -d "tap_stream_type=${{ matrix.stream_type }}" -d "tap_auth_method=${{ matrix.auth_method }}"
 
     - name: Install tox
       run: |
