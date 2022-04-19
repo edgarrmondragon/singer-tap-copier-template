@@ -7,6 +7,8 @@ _tasks:
 - "poetry lock"
 - "poetry install"
 
+_min_copier_version: "5.1.0"
+
 _envops:
   autoescape: false
   block_end_string: "%]"
