@@ -47,10 +47,18 @@ jobs:
         pipx install --pip-args=--constraint=.github/workflows/constraints.txt copier
         copier --version
 
-    - name: Create template
+    - name: Create target directory
       run: |
         mkdir ../output-dir
-        copier . ../output-dir --defaults -d "tap_stream_type=${{ matrix.stream_type }}" -d "tap_auth_method=${{ matrix.auth_method }}"
+
+    - name: Create ${{ matrix.stream_type }} tap with ${{ matrix.auth_method }} authentication
+      id: create-tap
+      run: >
+        copier . ../output-dir
+        --defaults
+        -d "python_main_version=${{ matrix.python-version }}"
+        -d "tap_stream_type=${{ matrix.stream_type }}"
+        -d "tap_auth_method=${{ matrix.auth_method }}"
 
     - name: Install tox
       run: |
