@@ -29,6 +29,8 @@ jobs:
       uses: actions/setup-python@v3.1.2
       with:
         python-version: ${{ matrix.python-version }}
+        cache: pip
+        cache-dependency-path: .github/workflows/constraints.txt
 
     - name: Upgrade pip
       run: |
