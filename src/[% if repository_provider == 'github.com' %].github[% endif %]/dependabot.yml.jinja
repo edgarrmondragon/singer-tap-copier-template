@@ -15,6 +15,7 @@ updates:
   - package-ecosystem: pip
     directory: "/.github/workflows"
     schedule:
+      interval: "daily"
       time: "[[ now().strftime('%H:%M') ]]"
     reviewers:
       - "[[ author_username ]]"
