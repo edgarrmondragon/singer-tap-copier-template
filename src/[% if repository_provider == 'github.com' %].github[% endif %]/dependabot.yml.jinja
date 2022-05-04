@@ -16,6 +16,7 @@ updates:
     directory: "/.github/workflows"
     schedule:
       time: "[[ '%H:%M' | strftime ]]"
+      interval: "daily"
     reviewers:
       - "[[ author_username ]]"
   - package-ecosystem: github-actions
