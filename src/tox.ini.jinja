@@ -12,24 +12,27 @@ whitelist_externals = poetry
 # To execute, run `tox -e pytest`
 envlist = py37, py38, py39, py310
 commands =
-    pytest
+    poetry install -v
+    poetry run pytest
 
 [testenv:format]
 # Attempt to auto-resolve lint errors before they are raised.
 # To execute, run `tox -e format`
 commands =
-    black [[ tap_package_import_name ]]
-    isort [[ tap_package_import_name ]]
+    poetry install -v
+    poetry run black [[ tap_package_import_name ]]
+    poetry run isort [[ tap_package_import_name ]]
 
 [testenv:lint]
 # Raise an error if lint and style standards are not met.
 # To execute, run `tox -e lint`
 ignore_errors = true
 commands =
-    black --check --diff [[ tap_package_import_name ]]
-    isort --check --diff [[ tap_package_import_name ]]
-    flake8 [[ tap_package_import_name ]]
-    mypy [[ tap_package_import_name ]] --exclude='tests/'
+    poetry install -v
+    poetry run black --check --diff [[ tap_package_import_name ]]
+    poetry run isort --check --diff [[ tap_package_import_name ]]
+    poetry run flake8 [[ tap_package_import_name ]]
+    poetry run mypy [[ tap_package_import_name ]] --exclude='tests/'
 
 [flake8]
 ignore = ANN101,W503
