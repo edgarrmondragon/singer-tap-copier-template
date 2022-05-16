@@ -24,12 +24,14 @@ python_versions = ["3.10", "3.9", "3.8", "3.7"]
 )
 def lint(session: nox.sessions.Session, stream_type: str, auth_method: str) -> None:
     """Lint generated project."""
+    ref = session.posargs[0] if session.posargs else "HEAD"
+
     with TemporaryDirectory() as tmpdir:
         session.run(
             "copier",
             ".",
             tmpdir,
-            "--vcs-ref=54d85ec09bac83eaf17fac897f831fc844cfda33",
+            f"--vcs-ref={ref}",
             "--force",
             "--defaults",
             "-d",
