@@ -6,7 +6,7 @@ _tasks:
 - "poetry env use [[ python_main_version ]]"
 - "poetry lock"
 
-_min_copier_version: "6.0.0b0"
+_min_copier_version: "6.0.0"
 
 _envops:
   autoescape: false

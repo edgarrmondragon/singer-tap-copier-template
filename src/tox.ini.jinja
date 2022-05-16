@@ -28,6 +28,7 @@ commands =
 # To execute, run `tox -e lint`
 ignore_errors = true
 commands =
+    ls -a
     poetry install -v
     poetry run black --check --diff [[ tap_package_import_name ]]
     poetry run isort --check --diff [[ tap_package_import_name ]]
