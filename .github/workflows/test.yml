@@ -6,7 +6,6 @@ jobs:
   linting:
     env:
       PIP_CONSTRAINT: .github/workflows/constraints.txt
-      NOXSESSION: ${{ matrix.session }}-${{ matrix.python-version }}(auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')
       FORCE_COLOR: "1"
     runs-on: ubuntu-latest
     strategy:
@@ -65,4 +64,4 @@ jobs:
 
     - name: Run Nox
       run: |
-        nox
+        nox -s "${{ matrix.session }}-${{ matrix.python-version }}(auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
