@@ -7,6 +7,18 @@ _tasks:
 - "poetry lock"
 - "poetry install"
 
+_min_copier_version: "6.0.0b0"
+
+_envops:
+  autoescape: false
+  block_end_string: "%]"
+  block_start_string: "[%"
+  comment_end_string: "#]"
+  comment_start_string: "[#"
+  keep_trailing_newline: true
+  variable_end_string: "]]"
+  variable_start_string: "[["
+
 # Prompts
 # ---------------------------------------------------------------------------------------------
 tap_source_name:

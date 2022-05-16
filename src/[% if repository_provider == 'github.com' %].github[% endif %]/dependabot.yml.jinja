@@ -9,20 +9,20 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      time: "[[ now().strftime('%H:%M') ]]"
+      time: "[[ '%H:%M' | strftime ]]"
     reviewers:
       - "[[ author_username ]]"
   - package-ecosystem: pip
     directory: "/.github/workflows"
     schedule:
+      time: "[[ '%H:%M' | strftime ]]"
       interval: "daily"
-      time: "[[ now().strftime('%H:%M') ]]"
     reviewers:
       - "[[ author_username ]]"
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: "weekly"
-      time: "[[ now().strftime('%H:%M') ]]"
+      time: "[[ '%H:%M' | strftime ]]"
     reviewers:
       - "[[ author_username ]]"
