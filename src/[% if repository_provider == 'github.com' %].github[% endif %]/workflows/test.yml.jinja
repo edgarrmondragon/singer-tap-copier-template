@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SETUPTOOLS_USE_DISTUTILS: stdlib
+      PIP_CONSTRAINT: .github/workflows/constraints.txt
     strategy:
       matrix:
         python-version: [" [[- python_main_version -]] "]
@@ -22,17 +23,18 @@ jobs:
 
     - name: Upgrade pip
       run: |
-        pip install --constraint=.github/workflows/constraints.txt pip
+        pip install pip
         pip --version
 
     - name: Install Poetry
       run: |
-        pipx install --pip-args=--constraint=.github/workflows/constraints.txt poetry
+        pipx install poetry
         poetry --version
 
     - name: Install tox
       run: |
-        pipx install --pip-args=--constraint=.github/workflows/constraints.txt tox
+        pipx install tox
+        pipx inject tox tox-poetry
         tox --version
 
     - name: Run lint command from tox.ini
