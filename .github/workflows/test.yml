@@ -13,18 +13,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: JWT }
-        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: API Key }
-        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: Bearer Token }
-        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: Basic Auth }
-        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: OAuth2 }
-        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: Custom or N/A }
-        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: JWT }
-        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: API Key }
-        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: Bearer Token }
-        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: Basic Auth }
-        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: OAuth2 }
-        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: Custom or N/A }
+        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: "JWT" }
+        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: "API Key" }
+        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: "Bearer Token" }
+        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: "Basic Auth" }
+        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: "OAuth2" }
+        - { python-version: "3.10", stream_type: REST, session: lint, auth_method: "Custom or N/A" }
+        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: "JWT" }
+        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: "API Key" }
+        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: "Bearer Token" }
+        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: "Basic Auth" }
+        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: "OAuth2" }
+        - { python-version: "3.10", stream_type: GraphQL, session: lint, auth_method: "Custom or N/A" }
 
     steps:
     - name: Checkout code
