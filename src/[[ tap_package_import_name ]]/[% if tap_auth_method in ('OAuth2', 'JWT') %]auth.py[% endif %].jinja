@@ -2,7 +2,7 @@
 
 """[[ tap_source_name ]] Authentication."""
 
-from typing import Type
+from __future__ import annotations
 
 from singer_sdk import Stream
 
@@ -37,7 +37,7 @@ class [[ authenticator ]](OAuthAuthenticator, metaclass=SingletonMeta):
 
     @classmethod
     def create_for_stream(
-        cls: Type["[[ authenticator ]]"],
+        cls: type["[[ authenticator ]]"],
         stream: Stream,
     ) -> "[[ authenticator ]]":
         """Create authenticator instance from a stream object.
@@ -63,7 +63,7 @@ class [[ authenticator ]](OAuthJWTAuthenticator):
 
     @classmethod
     def create_for_stream(
-        cls: Type["[[ authenticator ]]"],
+        cls: type["[[ authenticator ]]"],
         stream: Stream,
     ) -> "[[ authenticator ]]":
         """Create authenticator instance from a stream object.

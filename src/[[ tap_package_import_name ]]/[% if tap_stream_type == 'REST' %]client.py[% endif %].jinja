@@ -8,7 +8,9 @@
 
 """REST client handling, including [[ base_stream ]] base class."""
 
-from typing import Any, Dict, Optional
+from __future__ import annotations
+
+from typing import Any
 
 from singer_sdk import [[ tap_stream_type ]]Stream
 
@@ -105,9 +107,9 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
 
     def get_url_params(
         self,
-        context: Optional[dict],
-        next_page_token: Optional[Any],
-    ) -> Dict[str, Any]:
+        context: dict | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
         """Get URL query parameters.
 
         Args:

@@ -1,6 +1,6 @@
 """[[ tap_source_name ]] tap class."""
 
-from typing import List, Type
+from __future__ import annotations
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
@@ -11,7 +11,7 @@ from [[ tap_package_import_name ]].streams import Groups, Users
 
 # TODO: Compile a list of custom stream types here
 #       OR rewrite discover_streams() below with your custom logic.
-STREAM_TYPES: List [%-raw-%] [ [%-endraw-%] Type [%-raw-%] [ [%-endraw-%] [[ tap_stream_type ]]Stream [%-raw-%] ] [%-endraw-%] [%-raw-%] ] [%-endraw%] = [
+STREAM_TYPES: list [%-raw-%] [ [%-endraw-%] type [%-raw-%] [ [%-endraw-%] [[ tap_stream_type ]]Stream [%-raw-%] ] [%-endraw-%] [%-raw-%] ] [%-endraw%] = [
     Users,
     Groups,
 ]
@@ -66,7 +66,7 @@ class Tap[[ tap_source_id ]](Tap):
         ),
     ).to_dict()
 
-    def discover_streams(self) -> List[Stream]:
+    def discover_streams(self) -> list[Stream]:
         """Return a list of discovered streams.
 
         Returns:
