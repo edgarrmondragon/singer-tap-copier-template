@@ -3,3 +3,4 @@ poetry==1.1.13
 copier==6.0.0
 tox==3.25.0
 MarkUpSafe<2.2.0
+nox==2022.1.7
