@@ -59,7 +59,6 @@ jobs:
     - name: Install Tox
       run: |
         pipx install tox
-        pipx inject tox tox-poetry
         tox --version
 
     - name: Run Nox
