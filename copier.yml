@@ -110,3 +110,8 @@ python_main_version:
   type: str
   help: Main Python version supported by this project
   default: "3.10"
+
+vscode_files:
+  type: bool
+  help: Add VSCode files for debugging, etc.?
+  default: true
