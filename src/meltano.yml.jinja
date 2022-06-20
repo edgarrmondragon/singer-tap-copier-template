@@ -31,7 +31,7 @@ plugins:
       kind: password
       label: API Token
       description: API Token for [[ tap_source_name ]]
-[%- elif tap_auth_method == ("OAuth2", "JWT", "Basic Auth") %]
+[%- elif tap_auth_method in ("OAuth2", "JWT", "Basic Auth") %]
     - name: username
       kind: string
       label: Username
