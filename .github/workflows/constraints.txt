@@ -1,6 +1,6 @@
 pip==22.2.2
 poetry==1.2.0
 copier==6.1.0
-tox==3.25.1
+tox==3.26.0
 MarkUpSafe<2.2.0
 nox==2022.8.7
