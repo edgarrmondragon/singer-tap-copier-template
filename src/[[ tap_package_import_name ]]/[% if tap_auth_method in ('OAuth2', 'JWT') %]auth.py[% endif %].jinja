@@ -37,9 +37,9 @@ class [[ authenticator ]](OAuthAuthenticator, metaclass=SingletonMeta):
 
     @classmethod
     def create_for_stream(
-        cls: type["[[ authenticator ]]"],
+        cls: type[[ '[' ]][[ authenticator ]][[ ']' ]],
         stream: Stream,
-    ) -> "[[ authenticator ]]":
+    ) -> [[ authenticator ]]:
         """Create authenticator instance from a stream object.
 
         Args:
@@ -63,9 +63,9 @@ class [[ authenticator ]](OAuthJWTAuthenticator):
 
     @classmethod
     def create_for_stream(
-        cls: type["[[ authenticator ]]"],
+        cls: type[[ '[' ]][[ authenticator ]][[ ']' ]],
         stream: Stream,
-    ) -> "[[ authenticator ]]":
+    ) -> [[ authenticator ]]:
         """Create authenticator instance from a stream object.
 
         Args:

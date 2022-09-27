@@ -1,3 +1,20 @@
+[%- set prefix = tap_id|replace('-', '_')|upper -%]
+
+[%- if tap_auth_method in ("OAuth2", "JWT") -%]
+[%- set passenv = [prefix + '_CLIENT_ID'] -%]
+[%- elif tap_auth_method == "API Key" -%]
+[%- set passenv = [prefix + '_API_KEY'] -%]
+[%- elif tap_auth_method == "Bearer Token" -%]
+[%- set passenv = [prefix + '_TOKEN'] -%]
+[%- elif tap_auth_method in ("OAuth2", "JWT", "Basic Auth") -%]
+[%- set passenv = [prefix + '_USERNAME', prefix + '_PASSWORD'] -%]
+[%- else -%]
+[%- set passenv = [] -%]
+[%- endif %]
+
+[[- passenv.append(prefix + '_START_DATE') or "" -]]
+
+
 # This file can be used to customize tox tests as well as other test frameworks like flake8 and mypy
 
 [tox]
@@ -10,6 +27,7 @@ whitelist_externals = poetry
 [testenv:pytest]
 # Run the python tests.
 # To execute, run `tox -e pytest`
+passenv = [[ passenv|join(',') ]]
 envlist = py37, py38, py39, py310
 commands =
     poetry install -v
@@ -24,7 +42,7 @@ commands =
     poetry run mypy [[ tap_package_import_name ]] --exclude='tests/'
 
 [flake8]
-ignore = ANN101,W503
+ignore = ANN101,ANN401,W503,D105,D203,D213
 max-line-length = 88
 max-complexity = 10
 docstring-convention = google
