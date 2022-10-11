@@ -1,3 +1,19 @@
+[%- set prefix = tap_id|replace('-', '_')|upper -%]
+
+[%- if tap_auth_method in ("OAuth2", "JWT") -%]
+[%- set passenv = [prefix + '_CLIENT_ID'] -%]
+[%- elif tap_auth_method == "API Key" -%]
+[%- set passenv = [prefix + '_API_KEY'] -%]
+[%- elif tap_auth_method == "Bearer Token" -%]
+[%- set passenv = [prefix + '_TOKEN'] -%]
+[%- elif tap_auth_method in ("OAuth2", "JWT", "Basic Auth") -%]
+[%- set passenv = [prefix + '_USERNAME', prefix + '_PASSWORD'] -%]
+[%- else -%]
+[%- set passenv = [] -%]
+[%- endif %]
+
+[[- passenv.append(prefix + '_START_DATE') or "" -]]
+
 name: Test [[ tap_id ]]
 
 on: [push]
@@ -10,11 +26,16 @@ jobs:
       PIP_CONSTRAINT: .github/workflows/constraints.txt
     strategy:
       matrix:
-        python-version: [" [[- python_main_version -]] "]
+        include:
+        - {python-version: "[[- python_main_version -]]", session: "mypy"}
+        - {python-version: "3.10", session: "pytest"}
+        - {python-version: "3.9", session: "pytest"}
+        - {python-version: "3.8", session: "pytest"}
+        - {python-version: "3.7", session: "pytest"}
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3.0.2
+      uses: actions/checkout@v3.1.0
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4.2.0
@@ -38,5 +59,9 @@ jobs:
         tox --version
 
     - name: Run lint command from tox.ini
+      env:
+        [%- for env in passenv %]
+        [[ env ]]: ${{ secrets.[[ env ]] }}
+        [%- endfor %]
       run: |
-        tox -e lint
+        tox -e ${{ matrix.session }}

@@ -1,27 +1,25 @@
 """Nox configuration."""
 
 from __future__ import annotations
-from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import nox
 
+STREAM_TYPES = ["REST", "GraphQL"]
+AUTH_METHODS = [
+    "Bearer Token",
+    "JWT",
+    "API Key",
+    "Basic Auth",
+    "OAuth2",
+    "Custom or N/A",
+]
 python_versions = ["3.10", "3.9", "3.8", "3.7"]
 
 
 @nox.session(python=python_versions)
-@nox.parametrize("stream_type", ["REST", "GraphQL"])
-@nox.parametrize(
-    "auth_method",
-    [
-        "Bearer Token",
-        "JWT",
-        "API Key",
-        "Basic Auth",
-        "OAuth2",
-        "Custom or N/A",
-    ],
-)
+@nox.parametrize("stream_type", STREAM_TYPES)
+@nox.parametrize("auth_method", AUTH_METHODS)
 def lint(session: nox.sessions.Session, stream_type: str, auth_method: str) -> None:
     """Lint generated project."""
     ref = session.posargs[0] if session.posargs else "HEAD"
@@ -43,4 +41,7 @@ def lint(session: nox.sessions.Session, stream_type: str, auth_method: str) -> N
             external=True,
         )
         with session.cd(tmpdir):
-            session.run("tox", "-e", "lint", "-v", external=True)
+            session.run("tox", "-e", "mypy", "-v", external=True)
+            session.run("git", "init", external=True)
+            session.run("git", "add", ".", external=True)
+            session.run("pre-commit", "run", "--all", external=True)
