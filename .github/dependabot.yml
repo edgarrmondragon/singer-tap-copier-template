@@ -32,3 +32,11 @@ updates:
       - "edgarrmondragon"
     labels:
       - "dependencies"
+  - package-ecosystem: pip
+    directory: "/src/"
+    schedule:
+      interval: weekly
+    reviewers:
+      - "edgarrmondragon"
+    labels:
+      - "dependencies"
