@@ -14,7 +14,7 @@ AUTH_METHODS = [
     "OAuth2",
     "Custom or N/A",
 ]
-python_versions = ["3.10", "3.9", "3.8", "3.7"]
+python_versions = ["3.11", "3.10", "3.9", "3.8", "3.7"]
 
 
 @nox.session(python=python_versions)
