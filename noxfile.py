@@ -41,7 +41,6 @@ def lint(session: nox.sessions.Session, stream_type: str, auth_method: str) -> N
             external=True,
         )
         with session.cd(tmpdir):
-            session.run("tox", "-e", "mypy", "-v", external=True)
             session.run("git", "init", external=True)
             session.run("git", "add", ".", external=True)
             session.run("pre-commit", "run", "--all", external=True)
