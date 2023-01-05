@@ -1,10 +1,14 @@
 """Tests standard tap features using the built-in SDK tests library."""
 
+from __future__ import annotations
+
+from typing import Any
+
 from singer_sdk.testing import get_standard_tap_tests
 
 from [[ tap_package_import_name ]].tap import Tap[[ tap_source_id ]]
 
-SAMPLE_CONFIG = {}
+SAMPLE_CONFIG: dict[str, Any] = {}
 
 
 # Run standard built-in tap tests from the SDK:
