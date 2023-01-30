@@ -4,4 +4,4 @@ copier==7.0.1
 tox==4.3.5
 MarkUpSafe<2.2.0
 nox==2022.11.21
-pre-commit==2.21.0
+pre-commit==3.0.2
