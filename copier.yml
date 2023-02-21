@@ -106,6 +106,14 @@ repository_name:
   help: Your repository name
   default: "[[ tap_package_distribution_name ]]"
 
+repository_visibility:
+  type: str
+  help: Is the repository public?
+  default: public
+  choices:
+  - public
+  - private
+
 python_main_version:
   type: str
   help: Main Python version supported by this project

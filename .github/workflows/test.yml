@@ -15,6 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.10"]
+        visibility: ["private", "public"]
         stream_type: ["REST", "GraphQL"]
         auth_method: ["API Key", "Bearer Token", "Basic Auth", "OAuth2", "JWT", "Custom or N/A"]
 
@@ -73,4 +74,4 @@ jobs:
 
     - name: Run Nox
       run: |
-        nox -s "lint-${{ matrix.python-version }}(auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
+        nox -s "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
