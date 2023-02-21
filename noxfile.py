@@ -14,13 +14,20 @@ AUTH_METHODS = [
     "OAuth2",
     "Custom or N/A",
 ]
+VISIBILITIES = ["private", "public"]
 python_versions = ["3.11", "3.10", "3.9", "3.8", "3.7"]
 
 
 @nox.session(python=python_versions)
 @nox.parametrize("stream_type", STREAM_TYPES)
 @nox.parametrize("auth_method", AUTH_METHODS)
-def lint(session: nox.sessions.Session, stream_type: str, auth_method: str) -> None:
+@nox.parametrize("visibility", VISIBILITIES)
+def lint(
+    session: nox.sessions.Session,
+    stream_type: str,
+    auth_method: str,
+    visibility: str,
+) -> None:
     """Lint generated project."""
     ref = session.posargs[0] if session.posargs else "HEAD"
 
@@ -38,6 +45,8 @@ def lint(session: nox.sessions.Session, stream_type: str, auth_method: str) -> N
             f"tap_stream_type={stream_type}",
             "-d",
             f"tap_auth_method={auth_method}",
+            "-d",
+            f"repository_visibility={visibility}",
             external=True,
         )
         with session.cd(tmpdir):
