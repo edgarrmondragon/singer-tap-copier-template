@@ -5,15 +5,17 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+import typing as t
 
-import requests
 from singer_sdk.streams import [[ tap_stream_type ]]Stream
 
 [%- if tap_auth_method in ("OAuth2", "JWT") %]
 
 from [[ tap_package_import_name ]].auth import [[ authenticator ]]
 [%- endif %]
+
+if t.TYPE_CHECKING:
+    import requests
 
 
 class [[ base_stream ]]([[ tap_stream_type ]]Stream):
@@ -45,7 +47,7 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
         headers["User-Agent"] = f"{self.tap_name}/{self._tap.plugin_version}"
         return headers
 
-    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+    def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
         """Parse the response and return an iterator of result rows.
 
         Args:

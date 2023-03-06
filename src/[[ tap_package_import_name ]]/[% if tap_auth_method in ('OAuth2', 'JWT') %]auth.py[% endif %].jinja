@@ -4,7 +4,10 @@
 
 from __future__ import annotations
 
-from singer_sdk import Stream
+import typing as t
+
+if t.TYPE_CHECKING:
+    from singer_sdk import Stream
 
 [%- if tap_auth_method not in ("Basic Auth", "OAuth2", "JWT") %]
 # TODO: Delete this file or add custom authentication logic as needed.

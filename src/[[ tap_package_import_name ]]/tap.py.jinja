@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
+import typing as t
+
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
-from singer_sdk.streams import [[ tap_stream_type ]]Stream
 
 # TODO: Import your custom stream types here:
 from [[ tap_package_import_name ]].streams import Groups, Users
+
+if t.TYPE_CHECKING:
+    from singer_sdk.streams import [[ tap_stream_type ]]Stream
 
 # TODO: Compile a list of custom stream types here
 #       OR rewrite discover_streams() below with your custom logic.
