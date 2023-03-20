@@ -1,5 +1,5 @@
 pip==23.0.1
-poetry==1.4.0
+poetry==1.4.1
 copier==7.0.1
 tox==4.4.7
 MarkUpSafe<2.2.0
