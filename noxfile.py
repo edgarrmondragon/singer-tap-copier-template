@@ -1,6 +1,7 @@
 """Nox configuration."""
 
 from __future__ import annotations
+
 from tempfile import TemporaryDirectory
 
 import nox
