@@ -16,7 +16,7 @@ repos:
   - id: trailing-whitespace
 
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: 'v0.0.257'
+  rev: 'v0.0.259'
   hooks:
     - id: ruff
       args: [--fix, --exit-non-zero-on-fix]
@@ -51,5 +51,3 @@ repos:
   - id: flake8
     additional_dependencies:
     - darglint
-    - flake8-annotations
-    - flake8-docstrings
