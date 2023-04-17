@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: pip
     directory: "/.github/workflows"
     schedule:
-      interval: weekly
+      interval: monthly
     reviewers:
       - "edgarrmondragon"
     labels:
@@ -11,7 +11,7 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
     reviewers:
       - "edgarrmondragon"
 
@@ -19,7 +19,7 @@ updates:
   - package-ecosystem: pip
     directory: "/src"
     schedule:
-      interval: weekly
+      interval: monthly
     reviewers:
       - "edgarrmondragon"
     labels:
@@ -27,7 +27,7 @@ updates:
   - package-ecosystem: pip
     directory: "/src/[% if repository_provider == 'github.com' %].github[% endif %]/workflows"
     schedule:
-      interval: weekly
+      interval: monthly
     reviewers:
       - "edgarrmondragon"
     labels:
@@ -35,7 +35,7 @@ updates:
   - package-ecosystem: pip
     directory: "/src/"
     schedule:
-      interval: weekly
+      interval: monthly
     reviewers:
       - "edgarrmondragon"
     labels:
