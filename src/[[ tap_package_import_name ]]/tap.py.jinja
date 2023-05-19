@@ -7,14 +7,14 @@ import typing as t
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
 
-# TODO: Import your custom stream types here:
+# TODO([[ author_username ]]): Import your custom stream types here:
 from [[ tap_package_import_name ]].streams import Groups, Users
 
 if t.TYPE_CHECKING:
     from singer_sdk.streams import [[ tap_stream_type ]]Stream
 
-# TODO: Compile a list of custom stream types here
-#       OR rewrite discover_streams() below with your custom logic.
+# TODO([[ author_username ]]): Compile a list of custom stream types here
+# OR rewrite discover_streams() below with your custom logic.
 STREAM_TYPES: list [%-raw-%] [ [%-endraw-%] type [%-raw-%] [ [%-endraw-%] [[ tap_stream_type ]]Stream [%-raw-%] ] [%-endraw-%] [%-raw-%] ] [%-endraw%] = [
     Users,
     Groups,
@@ -26,7 +26,8 @@ class Tap[[ tap_source_id ]](Tap):
 
     name = "[[ tap_id ]]"
 
-    # TODO: Update this section with the actual config values you expect:
+    # TODO([[ author_username ]]): Update this section with the actual config
+    # values you expect:
     config_jsonschema = th.PropertiesList(
 [%- if tap_auth_method in ("OAuth2", "JWT") %]
         th.Property(

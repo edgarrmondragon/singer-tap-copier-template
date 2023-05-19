@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import nox
@@ -16,6 +17,10 @@ AUTH_METHODS = [
     "Custom or N/A",
 ]
 VISIBILITIES = ["private", "public"]
+RUFF_OVERRIDES = """\
+extend = "./pyproject.toml"
+extend-ignore = ["TD003"]
+"""
 python_versions = ["3.11", "3.10", "3.9", "3.8", "3.7"]
 
 
@@ -50,6 +55,11 @@ def lint(
             f"repository_visibility={visibility}",
             external=True,
         )
+
+        ruff_toml_path = Path(tmpdir).joinpath("ruff.toml")
+        with ruff_toml_path.open("w") as ruff_toml:
+            ruff_toml.write(RUFF_OVERRIDES)
+
         with session.cd(tmpdir):
             session.run("git", "init", external=True)
             session.run("git", "add", ".", external=True)
