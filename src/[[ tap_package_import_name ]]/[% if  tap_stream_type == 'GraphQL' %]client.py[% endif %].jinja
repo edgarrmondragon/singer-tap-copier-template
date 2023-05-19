@@ -56,6 +56,6 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
         Yields:
             Raw stream records.
         """
-        # TODO: Parse response body and return a set of records.
+        # TODO([[ author_username ]]): Parse response body and return a set of records.
         resp_json = response.json()
         yield from resp_json.get("<TODO>")

@@ -10,7 +10,8 @@ if t.TYPE_CHECKING:
     from singer_sdk import Stream
 
 [%- if tap_auth_method not in ("Basic Auth", "OAuth2", "JWT") %]
-# TODO: Delete this file or add custom authentication logic as needed.
+# TODO([[ author_username ]]): Delete this file or add custom authentication
+# logic as needed.
 
 [%- elif tap_auth_method == "OAuth2" %]
 from singer_sdk.authenticators import OAuthAuthenticator, SingletonMeta
@@ -28,7 +29,7 @@ class [[ authenticator ]](OAuthAuthenticator, metaclass=SingletonMeta):
         Returns:
             Dictionary with request body for OAuth endpoint.
         """
-        # TODO: Define the request body needed for the API.
+        # TODO([[ author_username ]]): Define the request body needed for the API.
         return {
             "resource": "https://analysis.windows.net/powerbi/api",
             "scope": self.oauth_scopes,
