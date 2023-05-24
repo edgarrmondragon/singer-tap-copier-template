@@ -21,17 +21,6 @@ singer-sdk = "0.27.0"
 [tool.poetry.dev-dependencies]
 pytest = "^7.3.1"
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3 # Vertical Hanging Indent
-use_parentheses = true
-include_trailing_comma = true
-src_paths = "[[ tap_package_import_name ]]"
-known_first_party = "[[ tap_package_import_name ]]"
-add_imports = [
-  "from __future__ import annotations",
-]
-
 [tool.pytest.ini_options]
 addopts = "-vvv"
 
@@ -74,6 +63,7 @@ unfixable = [
 
 [tool.ruff.isort]
 known-first-party = ["[[ tap_package_import_name ]]"]
+required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
