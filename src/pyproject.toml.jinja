@@ -1,3 +1,9 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core<2,>=1",
+]
+
 [tool.poetry]
 name = "[[ tap_package_distribution_name ]]"
 version = "0.0.1"
@@ -18,8 +24,12 @@ documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[
 python = "<3.12,>=3.7.1"
 singer-sdk = "0.27.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^7.3.1"
+
+[tool.poetry.scripts]
+# CLI declaration
+"[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
 
 [tool.pytest.ini_options]
 addopts = "-vvv"
@@ -31,14 +41,6 @@ warn_unused_configs = true
 [% raw %][[tool.mypy.overrides]][% endraw %]
 ignore_missing_imports = true
 module = ["backoff.*"]
-
-[build-system]
-requires = ["poetry-core>=1,<2"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
-# CLI declaration
-"[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
 
 [tool.ruff]
 ignore = [
