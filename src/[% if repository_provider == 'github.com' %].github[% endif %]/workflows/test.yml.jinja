@@ -19,8 +19,24 @@ name: Test [[ tap_id ]]
 on:
   push:
     branches: [main]
+    paths:
+      - [[ tap_package_import_name ]]/**
+      - tests/**
+      - noxfile.py
+      - poetry.lock
+      - pyproject.toml
+      - .github/workflows/test.yml
+      - .github/workflows/resources/constraints.txt
   pull_request:
     types: [opened, synchronize, reopened]
+    paths:
+      - [[ tap_package_import_name ]]/**
+      - tests/**
+      - noxfile.py
+      - poetry.lock
+      - pyproject.toml
+      - .github/workflows/test.yml
+      - .github/workflows/resources/constraints.txt
 
 jobs:
   test:
