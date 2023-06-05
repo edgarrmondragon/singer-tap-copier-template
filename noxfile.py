@@ -43,6 +43,7 @@ def lint(
             "copy",
             ".",
             tmpdir,
+            "--UNSAFE",
             f"--vcs-ref={ref}",
             "--force",
             "--defaults",
