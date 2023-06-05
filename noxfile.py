@@ -40,8 +40,10 @@ def lint(
     with TemporaryDirectory() as tmpdir:
         session.run(
             "copier",
+            "copy",
             ".",
             tmpdir,
+            "--UNSAFE",
             f"--vcs-ref={ref}",
             "--force",
             "--defaults",

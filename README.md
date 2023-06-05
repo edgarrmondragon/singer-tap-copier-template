@@ -12,13 +12,13 @@ pipx install copier
 Initialize `copier` template directly from Git:
 
 ```bash
-copier gh:edgarrmondragon/singer-tap-copier-template path/to/destination
+copier copy --UNSAFE gh:edgarrmondragon/singer-tap-copier-template path/to/destination
 ```
 
 Or locally from an already-cloned template repo:
 
 ```bash
-copier . path/to/destination
+copier copy --UNSAFE . path/to/destination
 ```
 
 See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html).
