@@ -40,6 +40,7 @@ def lint(
     with TemporaryDirectory() as tmpdir:
         session.run(
             "copier",
+            "copy",
             ".",
             tmpdir,
             f"--vcs-ref={ref}",
