@@ -72,13 +72,6 @@ jobs:
         pipx install nox
         nox --version
 
-    - name: Install Tox
-      env:
-        PIP_CONSTRAINT: .github/workflows/constraints.txt
-      run: |
-        pipx install tox
-        tox --version
-
     - name: Install pre-commit
       env:
         PIP_CONSTRAINT: .github/workflows/constraints.txt

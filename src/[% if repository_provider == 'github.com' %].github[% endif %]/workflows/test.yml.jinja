@@ -50,19 +50,21 @@ jobs:
       run: |
         pipx install poetry
         poetry --version
+        poetry self show plugins
 
-    - name: Install tox
+    - name: Install Nox
       run: |
-        pipx install tox
-        tox --version
+        pipx install nox
+        pipx inject nox nox-poetry
+        nox --version
 
-    - name: Run lint command from tox.ini
+    - name: Run tests
       env:
         [%- for env in passenv %]
         [[ env ]]: ${{ secrets.[[ env ]] }}
         [%- endfor %]
       run: |
-        tox -e pytest
+        nox
 
 [%- if repository_visibility == 'private' %]
 
