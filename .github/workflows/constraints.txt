@@ -2,6 +2,5 @@ copier==8.0.0
 MarkUpSafe<2.2.0
 pip==23.1.2
 poetry==1.5.1
-tox==4.6.0
 nox==2023.4.22
 pre-commit==3.3.2
