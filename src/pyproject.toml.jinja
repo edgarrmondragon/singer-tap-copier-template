@@ -25,7 +25,7 @@ python = "<3.12,>=3.7.1"
 singer-sdk = "0.28.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.3.1"
+pytest = "^7.3.2"
 
 [tool.poetry.scripts]
 # CLI declaration
@@ -44,8 +44,9 @@ module = ["backoff.*"]
 
 [tool.ruff]
 ignore = [
-  "ANN101", # missing-type-self
-  "DJ",     # flake8-django
+  "ANN101",  # missing-type-self
+  "DJ",      # flake8-django
+  "FIX002",  # line-contains-todo
 ]
 line-length = 88
 select = ["ALL"]
