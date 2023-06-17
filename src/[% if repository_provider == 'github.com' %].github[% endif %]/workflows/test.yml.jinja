@@ -42,8 +42,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      SETUPTOOLS_USE_DISTUTILS: stdlib
+      FORCE_COLOR: "1"
+      NOXPYTHON: ${{ matrix.python-version }}
+      NOXSESSION: tests
       PIP_CONSTRAINT: .github/workflows/constraints.txt
+      SETUPTOOLS_USE_DISTUTILS: stdlib
     strategy:
       matrix:
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
