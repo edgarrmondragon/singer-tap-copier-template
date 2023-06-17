@@ -31,17 +31,6 @@ pytest = "^7.3.2"
 # CLI declaration
 "[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
 
-[tool.pytest.ini_options]
-addopts = "-vvv"
-
-[tool.mypy]
-python_version = "3.10"
-warn_unused_configs = true
-
-[% raw %][[tool.mypy.overrides]][% endraw %]
-ignore_missing_imports = true
-module = ["backoff.*"]
-
 [tool.ruff]
 ignore = [
   "ANN101",  # missing-type-self
@@ -73,3 +62,14 @@ required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
+
+[tool.pytest.ini_options]
+addopts = "-vvv"
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_configs = true
+
+[% raw %][[tool.mypy.overrides]][% endraw %]
+ignore_missing_imports = true
+module = ["backoff.*"]
