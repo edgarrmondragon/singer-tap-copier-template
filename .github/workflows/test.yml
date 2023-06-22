@@ -5,7 +5,7 @@ on:
     paths:
     - src/**
     - noxfile.py
-    - .github/workflows/tests.yml
+    - .github/workflows/test.yml
     - .github/workflows/constraints.txt
   push:
     branches:
@@ -13,7 +13,7 @@ on:
     paths:
     - src/**
     - noxfile.py
-    - .github/workflows/tests.yml
+    - .github/workflows/test.yml
     - .github/workflows/constraints.txt
 
 concurrency:
