@@ -101,9 +101,7 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
         Returns:
             A dictionary of HTTP headers.
         """
-        headers = {}
-        headers["User-Agent"] = f"{self.tap_name}/{self._tap.plugin_version}"
-        return headers
+        return {"User-Agent": f"{self.tap_name}/{self._tap.plugin_version}"}
 
     def get_url_params(
         self,
