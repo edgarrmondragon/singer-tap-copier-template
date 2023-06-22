@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from singer_sdk import typing as th
 
 from [[ tap_package_import_name ]].client import [[ base_stream ]]
@@ -20,7 +22,7 @@ class Users([[ base_stream ]]):
     [%- if tap_stream_type == "REST" %]
     path = "/users"
     [%- endif %]
-    primary_keys = ["id"]
+    primary_keys: ClassVar[list[str]] = ["id"]
     replication_key = None
 
     schema = th.PropertiesList(
@@ -79,7 +81,7 @@ class Groups([[ base_stream ]]):
     [%- if tap_stream_type == "REST" %]
     path = "/groups"
     [%- endif %]
-    primary_keys = ["id"]
+    primary_keys: ClassVar[list[str]] = ["id"]
     replication_key = "modified"
 
     schema = th.PropertiesList(
