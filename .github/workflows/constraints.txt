@@ -1,4 +1,4 @@
-copier==8.0.0
+copier==8.1.0
 MarkUpSafe<2.2.0
 pip==23.1.2
 poetry==1.5.1
