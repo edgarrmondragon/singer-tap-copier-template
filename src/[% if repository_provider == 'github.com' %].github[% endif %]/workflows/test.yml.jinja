@@ -26,7 +26,7 @@ on:
       - poetry.lock
       - pyproject.toml
       - .github/workflows/test.yml
-      - .github/workflows/resources/constraints.txt
+      - .github/workflows/constraints.txt
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
@@ -36,7 +36,7 @@ on:
       - poetry.lock
       - pyproject.toml
       - .github/workflows/test.yml
-      - .github/workflows/resources/constraints.txt
+      - .github/workflows/constraints.txt
 
 jobs:
   test:
