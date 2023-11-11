@@ -24,6 +24,7 @@ jobs:
   linting:
     env:
       FORCE_COLOR: "1"
+      PYTHONWARNINGS: "all,error::DeprecationWarning"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
