@@ -24,7 +24,6 @@ jobs:
   linting:
     env:
       FORCE_COLOR: "1"
-      PYTHONWARNINGS: "all,error::DeprecationWarning"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -83,5 +82,7 @@ jobs:
         pre-commit --version
 
     - name: Run Nox
+      env:
+        PYTHONWARNINGS: "all,error::DeprecationWarning"
       run: |
         nox -s "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
