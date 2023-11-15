@@ -24,6 +24,7 @@ jobs:
   linting:
     env:
       FORCE_COLOR: "1"
+      NOXSESSION: "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -83,6 +84,12 @@ jobs:
 
     - name: Run Nox
       env:
+        PIP_ONLY_BINARY: "all"
+      run: |
+        nox --install-only
+
+    - name: Run Nox
+      env:
         PYTHONWARNINGS: "all,error::DeprecationWarning"
       run: |
-        nox -s "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
+        nox --reuse-existing-virtualenvs --no-install
