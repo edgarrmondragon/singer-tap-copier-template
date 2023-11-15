@@ -24,7 +24,7 @@ jobs:
   linting:
     env:
       FORCE_COLOR: "1"
-      NOXSESSION: "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
+      NOXSESSION: "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}',auth_method='${{ matrix.auth_method }}',stream_type='${{ matrix.stream_type }}')"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
