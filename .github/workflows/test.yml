@@ -81,7 +81,7 @@ jobs:
         pipx install pre-commit
         pre-commit --version
 
-    - name: Run Nox
+    - name: Install dependencies
       env:
         PIP_ONLY_BINARY: "all"
       run: >
@@ -96,4 +96,4 @@ jobs:
         nox
         --reuse-existing-virtualenvs
         --no-install
-        "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
+        -s "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
