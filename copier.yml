@@ -6,7 +6,7 @@ _tasks:
 - "poetry env use [[ python_main_version ]]"
 - "poetry lock"
 
-_min_copier_version: "8.0.0"
+_min_copier_version: "9.0.0"
 
 _envops:
   autoescape: false
@@ -99,7 +99,7 @@ repository_provider:
 dependabot_update_timezone:
   type: str
   help: Timezone to use for dependency update schedule
-  default: "UTC"
+  default: "Etc/UTC"
   when: "{{ repository_provider == 'github.com' }}"
 
 dependabot_update_time:
