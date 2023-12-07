@@ -35,12 +35,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4.1.1
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4.7.1
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
         cache: pip
@@ -72,6 +72,7 @@ jobs:
         PIP_CONSTRAINT: .github/workflows/constraints.txt
       run: |
         pipx install nox
+        pipx inject nox nox-poetry
         nox --version
 
     - name: Install pre-commit

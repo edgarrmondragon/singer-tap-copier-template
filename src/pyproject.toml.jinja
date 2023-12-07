@@ -22,9 +22,13 @@ documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
+[%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
+requests = ">=2,<3"
+[%- endif %]
 singer-sdk = "~=0.34.0"
 
 [tool.poetry.group.dev.dependencies]
+deptry = ">=0.12.0"
 pytest = "~=7.4"
 singer-sdk = { version = "~=0.34.0", extras = ["testing"] }
 
@@ -67,6 +71,12 @@ required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.deptry]
+known_first_party = ["[[ tap_package_import_name ]]"]
+
+[tool.deptry.package_module_name_map]
+pytest = "pytest"
 
 [tool.pytest.ini_options]
 addopts = "-vvv"
