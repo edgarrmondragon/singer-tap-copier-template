@@ -31,3 +31,11 @@ def tests(session: Session) -> None:
     session.install(".")
     session.install(*deps)
     session.run("pytest", *session.posargs)
+
+
+@session(name="deps", python=python_versions)
+def dependencies(session: Session) -> None:
+    """Check issues with dependencies."""
+    session.install(".")
+    session.install("deptry")
+    session.run("deptry", "[[ tap_package_import_name ]]")
