@@ -65,5 +65,6 @@ def lint(
         with session.cd(tmpdir):
             session.run("git", "init", external=True)
             session.run("git", "add", ".", external=True)
-            session.run("nox", "-rs", "deps", "-p", "3.11", external=True)
+            session.run("hatch", "run", "test:dependencies", external=True)
+            session.run("hatch", "run", "typing:check", external=True)
             session.run("pre-commit", "run", "--all", external=True)

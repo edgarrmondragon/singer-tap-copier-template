@@ -53,13 +53,6 @@ jobs:
         pip install pip
         pip --version
 
-    - name: Install Poetry
-      env:
-        PIP_CONSTRAINT: .github/workflows/constraints.txt
-      run: |
-        pipx install poetry
-        poetry --version
-
     - name: Install copier
       env:
         PIP_CONSTRAINT: .github/workflows/constraints.txt
@@ -67,12 +60,18 @@ jobs:
         pipx install copier
         copier --version
 
+    - name: Install Hatch
+      env:
+        PIP_CONSTRAINT: .github/workflows/constraints.txt
+      run: |
+        pipx install hatch
+        hatch --version
+
     - name: Install Nox
       env:
         PIP_CONSTRAINT: .github/workflows/constraints.txt
       run: |
         pipx install nox
-        pipx inject nox nox-poetry
         nox --version
 
     - name: Install pre-commit

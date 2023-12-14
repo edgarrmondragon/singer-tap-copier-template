@@ -15,7 +15,7 @@ if t.TYPE_CHECKING:
 
 # TODO([[ author_username ]]): Compile a list of custom stream types here
 # OR rewrite discover_streams() below with your custom logic.
-STREAM_TYPES: list [%-raw-%] [ [%-endraw-%] type [%-raw-%] [ [%-endraw-%] [[ tap_stream_type ]]Stream [%-raw-%] ] [%-endraw-%] [%-raw-%] ] [%-endraw%] = [
+STREAM_TYPES: list [%-raw-%] [ [%-endraw-%] type [%-raw-%] [ [%-endraw-%] [[ tap_stream_type ]]Stream[t.Any] [%-raw-%] ] [%-endraw-%] [%-raw-%] ] [%-endraw%] = [
     Users,
     Groups,
 ]
