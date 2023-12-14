@@ -21,14 +21,14 @@ repository = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ re
 documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]#readme"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4"
+python = ">=3.8"
 [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
 requests = ">=2,<3"
 [%- endif %]
 singer-sdk = "~=0.34.0"
 
 [tool.poetry.group.dev.dependencies]
-deptry = ">=0.12.0"
+deptry = { version = ">=0.12.0", python = "<4" }
 pytest = "~=7.4"
 singer-sdk = { version = "~=0.34.0", extras = ["testing"] }
 
