@@ -37,3 +37,8 @@ updates:
       - "[[ author_username ]]"
     commit-message:
       prefix: "ci: "
+    groups:
+      artifacts:
+        patterns:
+          - "actions/*-load-artifact"
+          - "hynek/build-and-inspect-python-package"
