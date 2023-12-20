@@ -15,6 +15,7 @@ on:
     - noxfile.py
     - .github/workflows/test.yml
     - .github/workflows/constraints.txt
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}

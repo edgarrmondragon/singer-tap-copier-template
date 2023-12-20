@@ -36,6 +36,9 @@ dependencies = [
   "singer-sdk~=0.34.0",
 ]
 [project.optional-dependencies]
+dev = [
+  "[[ tap_package_distribution_name ]][testing,typing]",
+]
 testing = [
   "deptry>=0.12",
   "pytest>=7.4",
@@ -111,6 +114,7 @@ convention = "google"
 [tool.deptry.package_module_name_map]
 mypy = "mypy"
 pytest = "pytest"
+[[ tap_package_distribution_name ]] = "[[ tap_package_import_name ]]"
 types-requests = "requests"
 
 [tool.deptry.per_rule_ignores]
