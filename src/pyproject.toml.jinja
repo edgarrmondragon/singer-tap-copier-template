@@ -35,27 +35,24 @@ dependencies = [
   [%- endif %]
   "singer-sdk~=0.34.0",
 ]
-[project.optional-dependencies]
-dev = [
+optional-dependencies.dev = [
   "[[ tap_package_distribution_name ]][testing,typing]",
 ]
-testing = [
+optional-dependencies.testing = [
   "deptry>=0.12",
   "pytest>=7.4",
   "singer-sdk[testing]~=0.34.0",
 ]
-typing = [
+optional-dependencies.typing = [
   "mypy",
   [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
   "types-requests",
   [%- endif %]
 ]
-[project.urls]
-Documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]#readme"
-Homepage = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
-Repository = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
-[project.scripts]
-"[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
+urls.Documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]#readme"
+urls.Homepage = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
+urls.Repository = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
+scripts."[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
 
 [tool.hatch.version]
 source = "vcs"
