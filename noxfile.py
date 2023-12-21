@@ -21,7 +21,7 @@ RUFF_OVERRIDES = """\
 extend = "./pyproject.toml"
 extend-ignore = ["TD003"]
 """
-python_versions = ["3.11", "3.10", "3.9", "3.8", "3.7"]
+python_versions = ["3.11", "3.10", "3.9", "3.8"]
 
 
 @nox.session(python=python_versions)
@@ -65,4 +65,6 @@ def lint(
         with session.cd(tmpdir):
             session.run("git", "init", external=True)
             session.run("git", "add", ".", external=True)
+            session.run("hatch", "run", "test:dependencies", external=True)
+            session.run("hatch", "run", "typing:check", external=True)
             session.run("pre-commit", "run", "--all", external=True)

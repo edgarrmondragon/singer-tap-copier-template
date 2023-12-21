@@ -8,12 +8,22 @@ updates:
       - "edgarrmondragon"
     labels:
       - "dependencies"
+    groups:
+      ci-dependencies:
+        update-types:
+          - "patch"
+          - "minor"
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: monthly
     reviewers:
       - "edgarrmondragon"
+    groups:
+      ci-dependencies:
+        update-types:
+          - "patch"
+          - "minor"
 
 # Template
   - package-ecosystem: pip
@@ -32,11 +42,8 @@ updates:
       - "edgarrmondragon"
     labels:
       - "dependencies"
-  - package-ecosystem: pip
-    directory: "/src/"
-    schedule:
-      interval: monthly
-    reviewers:
-      - "edgarrmondragon"
-    labels:
-      - "dependencies"
+    groups:
+      CI:
+        update-types:
+          - "patch"
+          - "minor"

@@ -18,7 +18,7 @@ if t.TYPE_CHECKING:
     import requests
 
 
-class [[ base_stream ]]([[ tap_stream_type ]]Stream):
+class [[ base_stream ]]([[ tap_stream_type ]]Stream[int]):
     """[[ tap_source_name ]] stream class."""
 
     url_base = "https://api.mysample.com"
@@ -37,7 +37,7 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
 [%- endif %]
 
     @property
-    def http_headers(self) -> dict:
+    def http_headers(self) -> dict[str, str]:
         """Return the http headers needed.
 
         Returns:
@@ -47,7 +47,10 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
         headers["User-Agent"] = f"{self.tap_name}/{self._tap.plugin_version}"
         return headers
 
-    def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
+    def parse_response(
+        self,
+        response: requests.Response,
+    ) -> t.Iterable[dict[str, t.Any]]:
         """Parse the response and return an iterator of result rows.
 
         Args:

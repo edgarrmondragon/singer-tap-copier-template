@@ -1,21 +1,22 @@
 [%- set base_stream = tap_source_id + 'Stream' -%]
-[%- set builtin_auth = {
-    "API Key": "APIKeyAuthenticator",
-    "Bearer Token": "BearerTokenAuthenticator",
-    "Basic Auth": "BasicAuthenticator",
-} -%]
 [%- set authenticator = tap_source_id + 'Authenticator' -%]
 
 """REST client handling, including [[ base_stream ]] base class."""
 
 from __future__ import annotations
 
-from typing import Any
+import typing as t
+
+[% if tap_auth_method == "Basic Auth" -%]
+from requests.auth import HTTPBasicAuth
+[% endif -%]
 
 from singer_sdk import [[ tap_stream_type ]]Stream
 
-[%- if tap_auth_method in builtin_auth %]
-from singer_sdk.authenticators import [[ builtin_auth[tap_auth_method] ]]
+[%- if tap_auth_method == "API Key" %]
+from singer_sdk.authenticators import APIKeyAuthenticator
+[%- elif tap_auth_method == "Bearer Token" %]
+from singer_sdk.authenticators import BearerTokenAuthenticator
 [%- endif %]
 
 [%- if tap_auth_method in ("OAuth2", "JWT") %]
@@ -24,7 +25,7 @@ from [[ tap_package_import_name ]].auth import [[ authenticator ]]
 [%- endif %]
 
 
-class [[ base_stream ]]([[ tap_stream_type ]]Stream):
+class [[ base_stream ]]([[ tap_stream_type ]]Stream[t.Any]):
     """[[ tap_source_name ]] stream class."""
 
     url_base = "https://api.mysample.com"
@@ -77,25 +78,18 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
 [%- elif tap_auth_method == "Basic Auth" %]
 
     @property
-    def authenticator(self) -> BasicAuthenticator:
+    def authenticator(self) -> HTTPBasicAuth:
         """Get an authenticator object.
 
         Returns:
             The authenticator instance for this REST stream.
         """
-        username = self.config["username"]
-        password = self.config["password"]
-
-        return BasicAuthenticator.create_for_stream(
-            self,
-            username=username,
-            password=password,
-        )
+        return HTTPBasicAuth(self.config["username"], self.config["password"])
 
 [%- endif %]
 
     @property
-    def http_headers(self) -> dict:
+    def http_headers(self) -> dict[str, str]:
         """Return the http headers needed.
 
         Returns:
@@ -105,9 +99,9 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
 
     def get_url_params(
         self,
-        context: dict | None,  # noqa: ARG002
-        next_page_token: Any | None,  # noqa: ARG002, ANN401
-    ) -> dict[str, Any]:
+        context: dict[str, t.Any] | None,  # noqa: ARG002
+        next_page_token: t.Any | None,  # noqa: ARG002, ANN401
+    ) -> dict[str, t.Any]:
         """Get URL query parameters.
 
         Args:
@@ -117,5 +111,5 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream):
         Returns:
             Mapping of URL query parameters.
         """
-        params: dict = {}
+        params: dict[str, t.Any] = {}
         return params

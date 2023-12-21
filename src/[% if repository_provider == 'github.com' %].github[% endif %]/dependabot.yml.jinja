@@ -13,6 +13,7 @@ updates:
       time: "[[ dependabot_update_time ]]"
     reviewers:
       - "[[ author_username ]]"
+    versioning-strategy: increase-if-necessary
     commit-message:
       prefix: "feat(deps): "
       prefix-development: "chore(deps-dev): "
@@ -36,3 +37,8 @@ updates:
       - "[[ author_username ]]"
     commit-message:
       prefix: "ci: "
+    groups:
+      artifacts:
+        patterns:
+          - "actions/*-load-artifact"
+          - "hynek/build-and-inspect-python-package"
