@@ -7,7 +7,7 @@ from __future__ import annotations
 import typing as t
 
 if t.TYPE_CHECKING:
-    from singer_sdk import Stream
+    from singer_sdk.streams.rest import RESTStream
 
 [%- if tap_auth_method not in ("Basic Auth", "OAuth2", "JWT") %]
 # TODO([[ author_username ]]): Delete this file or add custom authentication
@@ -23,7 +23,7 @@ class [[ authenticator ]](OAuthAuthenticator, metaclass=SingletonMeta):
     """Authenticator class for [[ tap_source_name ]]."""
 
     @property
-    def oauth_request_body(self) -> dict:
+    def oauth_request_body(self) -> dict[str, t.Any]:
         """Define the OAuth request body for the [[ tap_source_name ]] API.
 
         Returns:
@@ -42,7 +42,7 @@ class [[ authenticator ]](OAuthAuthenticator, metaclass=SingletonMeta):
     @classmethod
     def create_for_stream(
         cls: type[[ '[' ]][[ authenticator ]][[ ']' ]],
-        stream: Stream,
+        stream: RESTStream[t.Any],
     ) -> [[ authenticator ]]:
         """Create authenticator instance from a stream object.
 
@@ -68,7 +68,7 @@ class [[ authenticator ]](OAuthJWTAuthenticator):
     @classmethod
     def create_for_stream(
         cls: type[[ '[' ]][[ authenticator ]][[ ']' ]],
-        stream: Stream,
+        stream: RESTStream[t.Any],
     ) -> [[ authenticator ]]:
         """Create authenticator instance from a stream object.
 

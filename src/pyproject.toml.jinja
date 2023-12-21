@@ -1,46 +1,86 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
+build-backend = "hatchling.build"
 requires = [
-  "poetry-core<2,>=1",
+  "hatch-vcs",
+  "hatchling",
 ]
 
-[tool.poetry]
+[project]
 name = "[[ tap_package_distribution_name ]]"
-version = "0.0.1"
 description = "`[[ tap_id ]]` is a Singer tap for [[ tap_source_name ]], built with the Meltano SDK for Singer Taps."
-authors = ["[[ author_fullname ]] <[[ author_email ]]>"]
+readme = "README.md"
 keywords = [
   "ELT",
-  "singer.io",
   "[[ tap_source_name ]]",
+  "singer.io",
 ]
 license = "Apache-2.0"
-readme = "README.md"
-homepage = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
-repository = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
-documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]#readme"
+maintainers = [{ name = "[[ author_fullname ]]",  email = "[[ author_email ]]" }]
+authors = [{ name = "[[ author_fullname ]]",  email = "[[ author_email ]]" }]
+requires-python = ">=3.8"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dynamic = [
+  "version",
+]
+dependencies = [
+  [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
+  "requests<3,>=2",
+  [%- endif %]
+  "singer-sdk~=0.34.0",
+]
+optional-dependencies.dev = [
+  "[[ tap_package_distribution_name ]][testing,typing]",
+]
+optional-dependencies.testing = [
+  "deptry>=0.12",
+  "pytest>=7.4",
+  "singer-sdk[testing]~=0.34.0",
+]
+optional-dependencies.typing = [
+  "mypy",
+  [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
+  "types-requests",
+  [%- endif %]
+]
+urls.Documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]#readme"
+urls.Homepage = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
+urls.Repository = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
+scripts."[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
 
-[tool.poetry.dependencies]
-python = ">=3.8,<4"
-singer-sdk = "~=0.33.0"
+[tool.hatch.version]
+source = "vcs"
 
-[tool.poetry.group.dev.dependencies]
-pytest = "~=7.4"
-singer-sdk = { version = "~=0.33.0", extras = ["testing"] }
+[tool.hatch.envs.sync.scripts]
+console = "[[ tap_package_command_line_name ]] {args}"
+jsonl = "[[ tap_package_command_line_name ]] {args} > [[ tap_package_distribution_name ]].jsonl"
 
-[tool.poetry.scripts]
-# CLI declaration
-"[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
+[tool.hatch.envs.test]
+features = ["testing"]
+[tool.hatch.envs.test.scripts]
+integration = "pytest {args:tests}"
+dependencies = "deptry ."
+
+[tool.hatch.envs.typing]
+features = ["testing", "typing"]
+[tool.hatch.envs.typing.scripts]
+check = "mypy --strict {args:[[ tap_package_import_name ]] tests}"
 
 [tool.ruff]
 line-length = 88
-src = ["[[ tap_package_import_name ]]", "tests"]
 target-version = "py38"
 
 [tool.ruff.lint]
 ignore = [
   "ANN101",  # missing-type-self
   "DJ",      # flake8-django
+  "PD",      # pandas-vet
   "FIX002",  # line-contains-todo
   "COM812",  # missing-trailing-comma
   "ISC001",  # single-line-implicit-string-concatenation
@@ -53,6 +93,10 @@ unfixable = [
 [tool.ruff.lint.flake8-annotations]
 allow-star-arg-any = true
 
+[tool.ruff.lint.isort]
+known-first-party = ["[[ tap_package_import_name ]]"]
+required-imports = ["from __future__ import annotations"]
+
 [tool.ruff.lint.per-file-ignores]
 "noxfile.py" = ["ANN"]
 "tests/*" = [
@@ -61,18 +105,27 @@ allow-star-arg-any = true
   "SLF001",  # private-member-access
 ]
 
-[tool.ruff.lint.isort]
-known-first-party = ["[[ tap_package_import_name ]]"]
-required-imports = ["from __future__ import annotations"]
-
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.deptry.package_module_name_map]
+mypy = "mypy"
+pytest = "pytest"
+[[ tap_package_distribution_name ]] = "[[ tap_package_import_name ]]"
+types-requests = "requests"
+
+[tool.deptry.per_rule_ignores]
+DEP002 = [
+  "deptry",
+  "mypy",
+  "pytest",
+]
 
 [tool.pytest.ini_options]
 addopts = "-vvv"
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.11"
 warn_redundant_casts = true
 warn_unused_configs = true
 warn_unused_ignores = true
