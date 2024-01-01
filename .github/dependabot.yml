@@ -20,10 +20,9 @@ updates:
     reviewers:
       - "edgarrmondragon"
     groups:
-      ci-dependencies:
-        update-types:
-          - "patch"
-          - "minor"
+      actions:
+        patterns:
+          - "*"
 
 # Template
   - package-ecosystem: pip
