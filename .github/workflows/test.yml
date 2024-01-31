@@ -29,19 +29,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
         visibility: ["private", "public"]
         stream_type: ["REST", "GraphQL"]
         auth_method: ["API Key", "Bearer Token", "Basic Auth", "OAuth2", "JWT", "Custom or N/A"]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+    - uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
         cache: pip

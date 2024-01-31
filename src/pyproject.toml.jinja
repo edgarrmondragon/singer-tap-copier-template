@@ -33,15 +33,15 @@ dependencies = [
   [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
   "requests<3,>=2",
   [%- endif %]
-  "singer-sdk~=0.34.0",
+  "singer-sdk~=0.35.0a4",
 ]
 optional-dependencies.dev = [
   "[[ tap_package_distribution_name ]][testing,typing]",
 ]
 optional-dependencies.testing = [
   "deptry>=0.12",
-  "pytest>=7.4",
-  "singer-sdk[testing]~=0.34.0",
+  "pytest>=8.0",
+  "singer-sdk[testing]~=0.35.0a4",
 ]
 optional-dependencies.typing = [
   "mypy",
@@ -125,7 +125,7 @@ DEP002 = [
 addopts = "-vvv"
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 warn_redundant_casts = true
 warn_unused_configs = true
 warn_unused_ignores = true
