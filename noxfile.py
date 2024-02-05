@@ -19,6 +19,8 @@ AUTH_METHODS = [
 VISIBILITIES = ["private", "public"]
 RUFF_OVERRIDES = """\
 extend = "./pyproject.toml"
+
+[lint]
 extend-ignore = ["TD003"]
 """
 python_versions = ["3.12", "3.11", "3.10", "3.9", "3.8"]
