@@ -14,7 +14,7 @@ keywords = [
   "[[ tap_source_name ]]",
   "singer.io",
 ]
-license = "Apache-2.0"
+license.file = "LICENSE"
 maintainers = [{ name = "[[ author_fullname ]]",  email = "[[ author_email ]]" }]
 authors = [{ name = "[[ author_fullname ]]",  email = "[[ author_email ]]" }]
 requires-python = ">=3.8"
@@ -33,7 +33,7 @@ dependencies = [
   [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
   "requests<3,>=2",
   [%- endif %]
-  "singer-sdk~=0.35.0a4",
+  "singer-sdk~=0.35.0",
 ]
 optional-dependencies.dev = [
   "[[ tap_package_distribution_name ]][testing,typing]",
@@ -41,7 +41,7 @@ optional-dependencies.dev = [
 optional-dependencies.testing = [
   "deptry>=0.12",
   "pytest>=8",
-  "singer-sdk[testing]~=0.35.0a4",
+  "singer-sdk[testing]~=0.35.0",
 ]
 optional-dependencies.typing = [
   "mypy",
@@ -66,6 +66,11 @@ features = ["testing"]
 [tool.hatch.envs.test.scripts]
 integration = "pytest {args:tests}"
 dependencies = "deptry ."
+
+[tool.hatch.envs.all]
+template = "test"
+[% raw %][[tool.hatch.envs.all.matrix]][% endraw %]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
 [tool.hatch.envs.typing]
 features = ["testing", "typing"]
@@ -98,7 +103,6 @@ known-first-party = ["[[ tap_package_import_name ]]"]
 required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint.per-file-ignores]
-"noxfile.py" = ["ANN"]
 "tests/*" = [
   "ANN201",  # missing-return-type-public-function
   "S101",    # assert
@@ -127,6 +131,9 @@ addopts = "-vvv"
 [tool.mypy]
 python_version = "3.12"
 warn_redundant_casts = true
+warn_return_any = true
+warn_no_return = true
+warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
 
