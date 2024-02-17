@@ -49,10 +49,10 @@ pipx install hatch
 Run integration tests:
 
 ```bash
-hatch run tests:integration
+hatch run test:integration
 ```
 
-You can also test the `tap-[[ tap_package_command_line_name ]]` CLI interface directly:
+You can also test the `[[ tap_package_command_line_name ]]` CLI interface directly:
 
 ```bash
 hatch run sync:console -- --about --format=json
@@ -75,13 +75,13 @@ the file. Go ahead and [install Meltano](https://docs.meltano.com/getting-starte
 1. Check that the extractor is working properly
 
    ```bash
-   meltano invoke tap-[[ tap_package_command_line_name ]] --version
+   meltano invoke [[ tap_package_command_line_name ]] --version
    ```
 
 1. Execute an ELT pipeline
 
    ```bash
-   meltano run tap-[[ tap_package_command_line_name ]] target-jsonl
+   meltano run [[ tap_package_command_line_name ]] target-jsonl
    ```
 
 ### SDK Dev Guide
