@@ -33,7 +33,7 @@ dependencies = [
   [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
   "requests<3,>=2",
   [%- endif %]
-  "singer-sdk~=0.35.0",
+  "singer-sdk~=0.36.0",
 ]
 optional-dependencies.dev = [
   "[[ tap_package_distribution_name ]][testing,typing]",
@@ -79,7 +79,6 @@ check = "mypy --strict {args:[[ tap_package_import_name ]] tests}"
 
 [tool.ruff]
 line-length = 88
-target-version = "py38"
 
 [tool.ruff.lint]
 ignore = [
