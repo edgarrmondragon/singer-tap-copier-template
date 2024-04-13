@@ -33,7 +33,7 @@ dependencies = [
   [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
   "requests<3,>=2",
   [%- endif %]
-  "singer-sdk~=0.36.0",
+  "singer-sdk~=0.37.0a3",
 ]
 optional-dependencies.dev = [
   "[[ tap_package_distribution_name ]][testing,typing]",
