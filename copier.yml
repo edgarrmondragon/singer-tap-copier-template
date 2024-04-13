@@ -15,6 +15,9 @@ _envops:
   variable_end_string: "]]"
   variable_start_string: "[["
 
+_tasks:
+  - "git init"
+
 # Prompts
 # ---------------------------------------------------------------------------------------------
 tap_source_name:
