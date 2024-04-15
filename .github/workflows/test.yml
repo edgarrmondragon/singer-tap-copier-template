@@ -7,6 +7,7 @@ on:
     - noxfile.py
     - .github/workflows/test.yml
     - .github/workflows/constraints.txt
+    - copier.yml
   push:
     branches:
     - 'main'
@@ -15,6 +16,7 @@ on:
     - noxfile.py
     - .github/workflows/test.yml
     - .github/workflows/constraints.txt
+    - copier.yml
   workflow_dispatch:
 
 concurrency:
@@ -29,19 +31,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
         visibility: ["private", "public"]
         stream_type: ["REST", "GraphQL"]
         auth_method: ["API Key", "Bearer Token", "Basic Auth", "OAuth2", "JWT", "Custom or N/A"]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+    - uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
         cache: pip
@@ -49,35 +49,35 @@ jobs:
 
     - name: Upgrade pip
       env:
-        PIP_CONSTRAINT: .github/workflows/constraints.txt
+        PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
       run: |
         pip install pip
         pip --version
 
     - name: Install copier
       env:
-        PIP_CONSTRAINT: .github/workflows/constraints.txt
+        PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
       run: |
         pipx install copier
         copier --version
 
     - name: Install Hatch
       env:
-        PIP_CONSTRAINT: .github/workflows/constraints.txt
+        PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
       run: |
         pipx install hatch
         hatch --version
 
     - name: Install Nox
       env:
-        PIP_CONSTRAINT: .github/workflows/constraints.txt
+        PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
       run: |
         pipx install nox
         nox --version
 
     - name: Install pre-commit
       env:
-        PIP_CONSTRAINT: .github/workflows/constraints.txt
+        PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
       run: |
         pipx install pre-commit
         pre-commit --version

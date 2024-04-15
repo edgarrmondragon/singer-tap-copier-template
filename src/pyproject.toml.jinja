@@ -14,7 +14,7 @@ keywords = [
   "[[ tap_source_name ]]",
   "singer.io",
 ]
-license = "Apache-2.0"
+license.file = "LICENSE"
 maintainers = [{ name = "[[ author_fullname ]]",  email = "[[ author_email ]]" }]
 authors = [{ name = "[[ author_fullname ]]",  email = "[[ author_email ]]" }]
 requires-python = ">=3.8"
@@ -33,29 +33,26 @@ dependencies = [
   [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
   "requests<3,>=2",
   [%- endif %]
-  "singer-sdk~=0.34.0",
+  "singer-sdk~=0.36.0",
 ]
-[project.optional-dependencies]
-dev = [
+optional-dependencies.dev = [
   "[[ tap_package_distribution_name ]][testing,typing]",
 ]
-testing = [
+optional-dependencies.testing = [
   "deptry>=0.12",
-  "pytest>=7.4",
-  "singer-sdk[testing]~=0.34.0",
+  "pytest>=8",
+  "singer-sdk[testing]",
 ]
-typing = [
+optional-dependencies.typing = [
   "mypy",
   [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
   "types-requests",
   [%- endif %]
 ]
-[project.urls]
-Documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]#readme"
-Homepage = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
-Repository = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
-[project.scripts]
-"[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
+urls.Documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]#readme"
+urls.Homepage = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
+urls.Repository = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
+scripts."[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
 
 [tool.hatch.version]
 source = "vcs"
@@ -70,6 +67,11 @@ features = ["testing"]
 integration = "pytest {args:tests}"
 dependencies = "deptry ."
 
+[tool.hatch.envs.all]
+template = "test"
+[% raw %][[tool.hatch.envs.all.matrix]][% endraw %]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
 [tool.hatch.envs.typing]
 features = ["testing", "typing"]
 [tool.hatch.envs.typing.scripts]
@@ -77,7 +79,6 @@ check = "mypy --strict {args:[[ tap_package_import_name ]] tests}"
 
 [tool.ruff]
 line-length = 88
-target-version = "py38"
 
 [tool.ruff.lint]
 ignore = [
@@ -101,7 +102,6 @@ known-first-party = ["[[ tap_package_import_name ]]"]
 required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint.per-file-ignores]
-"noxfile.py" = ["ANN"]
 "tests/*" = [
   "ANN201",  # missing-return-type-public-function
   "S101",    # assert
@@ -128,8 +128,11 @@ DEP002 = [
 addopts = "-vvv"
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 warn_redundant_casts = true
+warn_return_any = true
+warn_no_return = true
+warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
 

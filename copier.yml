@@ -15,6 +15,9 @@ _envops:
   variable_end_string: "]]"
   variable_start_string: "[["
 
+_tasks:
+  - "git init"
+
 # Prompts
 # ---------------------------------------------------------------------------------------------
 tap_source_name:
@@ -126,7 +129,7 @@ repository_visibility:
 python_main_version:
   type: str
   help: Main Python version supported by this project
-  default: "3.11"
+  default: "3.12"
 
 vscode_files:
   type: bool
