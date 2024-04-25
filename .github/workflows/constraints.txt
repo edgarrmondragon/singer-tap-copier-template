@@ -1,6 +1,6 @@
 copier==9.1.1
 pyyaml-include<2.0  # https://github.com/copier-org/copier/issues/1568
-hatch==1.9.4
+hatch==1.9.7
 nox==2024.3.2
 pip==24.0
 pre-commit==3.7.0
