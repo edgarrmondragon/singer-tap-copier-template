@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "[[ tap_package_command_line_name ]]",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "program": "[[ tap_package_import_name ]]",
@@ -14,6 +14,8 @@
             "args": [
                 "--config",
                 ".secrets/config.json",
+		        "--config",
+		        "ENV",
             ],
         },
     ]

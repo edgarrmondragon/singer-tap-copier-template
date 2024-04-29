@@ -24,16 +24,19 @@ plugins:
       kind: password
       label: Client ID
       description: Client ID to authenticate in [[ tap_source_name ]]
+      sensitive: true
 [%- elif tap_auth_method == "API Key" %]
     - name: api_key
       kind: password
       label: API Key
       description: API Key for [[ tap_source_name ]]
+      sensitive: true
 [%- elif tap_auth_method == "Bearer Token" %]
     - name: token
       kind: password
       label: API Token
       description: API Token for [[ tap_source_name ]]
+      sensitive: true
 [%- elif tap_auth_method in ("OAuth2", "JWT", "Basic Auth") %]
     - name: username
       kind: string
@@ -43,6 +46,7 @@ plugins:
       kind: password
       label: Password
       description: Password in [[ tap_source_name ]]
+      sensitive: true
 [%- endif %]
     - name: start_date
       kind: date_iso8601

@@ -1,5 +1,6 @@
-copier==9.1.0
-hatch==1.9.0
-nox==2023.4.22
-pip==23.3.2
-pre-commit==3.6.0
+copier==9.1.1
+pyyaml-include<2.0  # https://github.com/copier-org/copier/issues/1568
+hatch==1.9.7
+nox==2024.3.2
+pip==24.0
+pre-commit==3.7.0
