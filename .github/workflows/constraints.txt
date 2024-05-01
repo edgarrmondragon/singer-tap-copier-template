@@ -1,5 +1,4 @@
 copier==9.2.0
-pyyaml-include<2.0  # https://github.com/copier-org/copier/issues/1568
 hatch==1.9.7
 nox==2024.4.15
 pip==24.0
