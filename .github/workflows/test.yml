@@ -101,7 +101,7 @@ jobs:
 
     - name: Run Nox
       env:
-        PYTHONWARNINGS: "all,error::DeprecationWarning"
+        PYTHONWARNINGS: "all,error::DeprecationWarning,ignore::DeprecationWarning:hatchling"
       run: >
         nox
         --reuse-existing-virtualenvs
