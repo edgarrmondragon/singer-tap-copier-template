@@ -57,6 +57,9 @@ scripts."[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].t
 [tool.hatch.version]
 source = "vcs"
 
+[tool.hatch.envs.default]
+installer = "uv"
+
 [tool.hatch.envs.sync.scripts]
 console = "[[ tap_package_command_line_name ]] {args}"
 jsonl = "[[ tap_package_command_line_name ]] {args} > [[ tap_package_distribution_name ]].jsonl"
