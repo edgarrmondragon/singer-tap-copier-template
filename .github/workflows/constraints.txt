@@ -1,5 +1,5 @@
 copier==9.2.0
-hatch==1.9.7
+hatch==1.10.0
 nox==2024.4.15
-pip==24.0
+pip==24.1b1
 pre-commit==3.7.0
