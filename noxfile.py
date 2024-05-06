@@ -7,6 +7,9 @@ from tempfile import TemporaryDirectory
 
 import nox
 
+nox.needs_version = ">=2024.4.15"
+nox.options.default_venv_backend = "uv|virtualenv"
+
 STREAM_TYPES = ["REST", "GraphQL"]
 AUTH_METHODS = [
     "Bearer Token",
