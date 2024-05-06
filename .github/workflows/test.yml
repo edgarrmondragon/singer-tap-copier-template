@@ -101,7 +101,7 @@ jobs:
 
     - name: Run Nox
       env:
-        PYTHONWARNINGS: "all,error::DeprecationWarning,ignore:pip._vendor"
+        PYTHONWARNINGS: "all,error::DeprecationWarning"
       run: >
         nox
         --reuse-existing-virtualenvs
