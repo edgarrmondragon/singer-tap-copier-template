@@ -75,6 +75,14 @@ features = [
 [tool.hatch.envs.test.scripts]
 integration = "pytest {args:tests}"
 dependencies = "deptry ."
+[% raw %][[tool.hatch.envs.test.matrix]][% endraw %]
+python = [
+  "3.8",
+  "3.9",
+  "3.10",
+  "3.11",
+  "3.12",
+]
 
 [tool.hatch.envs.all]
 template = "test"
@@ -94,6 +102,14 @@ features = [
 ]
 [tool.hatch.envs.typing.scripts]
 check = "mypy --strict {args:[[ tap_package_import_name ]] tests}"
+[% raw %][[tool.hatch.envs.typing.matrix]][% endraw %]
+python = [
+  "3.8",
+  "3.9",
+  "3.10",
+  "3.11",
+  "3.12",
+]
 
 [tool.ruff]
 line-length = 88

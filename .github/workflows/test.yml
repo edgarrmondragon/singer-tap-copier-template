@@ -91,6 +91,19 @@ jobs:
         pipx install pre-commit
         pre-commit --version
 
+    - name: Install dependencies
+      env:
+        PIP_ONLY_BINARY: "all"
+      run: >
+        nox
+        --install-only
+        -s "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
+
     - name: Run Nox
-      run: |
-        nox -s "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
+      env:
+        PYTHONWARNINGS: "all,error::DeprecationWarning,ignore::DeprecationWarning:setuptools_scm._get_version_impl"
+      run: >
+        nox
+        --reuse-existing-virtualenvs
+        --no-install
+        -s "lint-${{ matrix.python-version }}(visibility='${{ matrix.visibility }}', auth_method='${{ matrix.auth_method }}', stream_type='${{ matrix.stream_type }}')"
