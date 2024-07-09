@@ -50,6 +50,7 @@ jobs:
         - "3.10"
         - "3.11"
         - "3.12"
+        - "3.13"
         include:
         - { script: "test:dependencies", python-version: "3.12" }
         - { script: "typing:check",      python-version: "3.12" }
@@ -83,6 +84,7 @@ jobs:
     - name: Run tests
       env:
         HATCH_ENV: ${{ matrix.python-version }}
+        HATCH_VERBOSE: "1"
         [%- for env in passenv %]
         [[ env ]]: ${{ secrets.[[ env ]] }}
         [%- endfor %]
