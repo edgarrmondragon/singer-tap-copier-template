@@ -72,4 +72,5 @@ def lint(
             session.run("git", "add", ".", external=True)
             session.run("hatch", "run", "test:dependencies", external=True)
             session.run("hatch", "run", "typing:check", external=True)
+            session.run("cat", "pyproject.toml", external=True)
             session.run("pre-commit", "run", "--all", external=True)
