@@ -84,7 +84,7 @@ jobs:
 
     - name: Run tests
       env:
-        HATCH_ENV: ${{ matrix.python-version }}
+        HATCH_PYTHON: ${{ matrix.python-version }}
         HATCH_VERBOSE: "1"
         [%- for env in passenv %]
         [[ env ]]: ${{ secrets.[[ env ]] }}
