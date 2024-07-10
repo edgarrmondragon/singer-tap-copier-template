@@ -24,6 +24,9 @@ from singer_sdk.authenticators import BearerTokenAuthenticator
 from [[ tap_package_import_name ]].auth import [[ authenticator ]]
 [%- endif %]
 
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
+
 
 class [[ base_stream ]]([[ tap_stream_type ]]Stream[t.Any]):
     """[[ tap_source_name ]] stream class."""
@@ -99,7 +102,7 @@ class [[ base_stream ]]([[ tap_stream_type ]]Stream[t.Any]):
 
     def get_url_params(
         self,
-        context: dict[str, t.Any] | None,  # noqa: ARG002
+        context: Context[str, t.Any] | None,  # noqa: ARG002
         next_page_token: t.Any | None,  # noqa: ARG002, ANN401
     ) -> dict[str, t.Any]:
         """Get URL query parameters.
