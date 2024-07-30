@@ -39,9 +39,9 @@ dependencies = [
   "requests<3,>=2",
   [%- endif %]
   [%- if tap_auth_method == 'JWT' %]
-  "singer-sdk[jwt]~=0.38.0",
+  "singer-sdk[jwt]~=0.39.0",
   [%- else %]
-  "singer-sdk~=0.38.0",
+  "singer-sdk~=0.39.0",
   [%- endif %]
 ]
 optional-dependencies.dev = [
@@ -156,7 +156,7 @@ DEP002 = [
 max_supported_python = "3.13"
 
 [tool.pytest.ini_options]
-addopts = "-vvv"
+addopts = "-vvv --durations=10"
 
 [tool.mypy]
 python_version = "3.12"
