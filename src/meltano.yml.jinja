@@ -4,6 +4,8 @@ project_id: [[ tap_id ]]
 default_environment: dev
 environments:
 - name: dev
+venv:
+  backend: uv
 plugins:
   extractors:
   - name: [[ tap_id ]]
@@ -17,6 +19,9 @@ plugins:
     - state
     - catalog
     - discover
+    - about
+    - stream-maps
+
     settings:
     # TODO: To configure using Meltano, declare settings and their types here:
 [%- if tap_auth_method in ("OAuth2", "JWT") %]
@@ -52,8 +57,10 @@ plugins:
       kind: date_iso8601
       label: Start Date
       description: Earliest datetime to get data from
+
     config:
       start_date: "[[ '%Y-%m-%d' | strftime ]]"
+
   loaders:
   - name: target-jsonl
     variant: andyh1203
