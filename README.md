@@ -2,23 +2,23 @@
 
 To use this [`copier`](https://copier.readthedocs.io) template:
 
-```bash
-pip3 install pipx
-pipx ensurepath
-# You may need to reopen your shell at this point
-pipx install copier
-```
+1. Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
+2. Install `copier`:
 
-Initialize `copier` template directly from Git:
+   ```bash
+   pipx install copier
+   ```
 
-```bash
-copier copy --UNSAFE gh:edgarrmondragon/singer-tap-copier-template path/to/destination
-```
+3. Initialize `copier` template directly from Git:
 
-Or locally from an already-cloned template repo:
+   ```bash
+   copier copy --UNSAFE gh:edgarrmondragon/singer-tap-copier-template path/to/destination
+   ```
 
-```bash
-copier copy --UNSAFE . path/to/destination
-```
+   Or locally from an already-cloned template repo:
 
-See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html).
+   ```bash
+   copier copy --UNSAFE . path/to/destination
+   ```
+
+See the [Singer SDK dev guide](https://sdk.meltano.com/en/latest/dev_guide.html).
