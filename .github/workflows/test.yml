@@ -23,10 +23,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
+env:
+  FORCE_COLOR: "1"
+
 jobs:
   linting:
-    env:
-      FORCE_COLOR: "1"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -34,7 +35,13 @@ jobs:
         python-version: ["3.12"]
         visibility: ["private", "public"]
         stream_type: ["REST", "GraphQL"]
-        auth_method: ["API Key", "Bearer Token", "Basic Auth", "OAuth2", "JWT", "Custom or N/A"]
+        auth_method:
+        - "API Key"
+        - "Bearer Token"
+        - "Basic Auth"
+        - "OAuth2"
+        - "JWT"
+        - "Custom or N/A"
 
     steps:
     - uses: actions/checkout@v4
