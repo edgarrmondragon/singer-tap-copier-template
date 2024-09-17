@@ -6,7 +6,7 @@ To use this [`copier`](https://copier.readthedocs.io) template:
 2. Install `copier`:
 
    ```bash
-   pipx install copier
+   uv tool install copier
    ```
 
 3. Initialize `copier` template directly from Git:
