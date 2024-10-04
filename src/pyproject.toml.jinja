@@ -38,9 +38,9 @@ dependencies = [
   "requests<3,>=2",
   [%- endif %]
   [%- if tap_auth_method == 'JWT' %]
-  "singer-sdk[jwt]~=0.40.0",
+  "singer-sdk[jwt]~=0.41.0",
   [%- else %]
-  "singer-sdk~=0.40.0",
+  "singer-sdk~=0.41.0",
   [%- endif %]
 ]
 optional-dependencies.dev = [
