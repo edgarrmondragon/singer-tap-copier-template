@@ -41,6 +41,7 @@ class Tap[[ tap_source_id ]](Tap):
             "api_key",
             th.StringType,
             required=True,
+            secret=True,
             description="API Key for [[ tap_source_name ]]",
         ),
 [%- elif tap_auth_method == "Bearer Token" %]
@@ -48,6 +49,7 @@ class Tap[[ tap_source_id ]](Tap):
             "token",
             th.StringType,
             required=True,
+            secret=True,
             description="API Token for [[ tap_source_name ]]",
         ),
 [%- elif tap_auth_method in ("OAuth2", "JWT", "Basic Auth") %]
@@ -61,6 +63,7 @@ class Tap[[ tap_source_id ]](Tap):
             "password",
             th.StringType,
             required=True,
+            secret=True,
             description="Password in [[ tap_source_name ]]",
         ),
 [%- endif %]
