@@ -40,11 +40,10 @@ You can easily run `[[ tap_id ]]` by itself or in a pipeline using [Meltano](htt
 
 ### Initialize your Development Environment
 
-```bash
-pipx install hatch
-```
+1. Install [`hatch`](https://hatch.pypa.io/latest/install/).
+1. Install [`meltano`](https://docs.meltano.com/getting-started/installation).
 
-### Create and Run Tests
+### Running Integration Tests
 
 Run integration tests:
 
@@ -64,12 +63,13 @@ _**Note:** This tap will work in any Singer environment and does not require Mel
 Examples here are for convenience and to streamline end-to-end orchestration scenarios._
 
 Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any _"TODO"_ items listed in
-the file. Go ahead and [install Meltano](https://docs.meltano.com/getting-started/installation/) if you haven't already.
+the file.
+
+The following steps assume you have Meltano 3.5+ installed. If you have an older version, please upgrade your Meltano installation.
 
 1. Install all plugins
 
    ```bash
-   meltano install
    meltano lock --update --all
    ```
 
