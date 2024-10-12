@@ -34,6 +34,8 @@ class Tap[[ tap_source_id ]](Tap):
             "client_id",
             th.StringType,
             required=True,
+            secret=True,
+            title="Client ID",
             description="Client ID to authenticate in [[ tap_source_name ]]",
         ),
 [%- elif tap_auth_method == "API Key" %]
@@ -41,6 +43,8 @@ class Tap[[ tap_source_id ]](Tap):
             "api_key",
             th.StringType,
             required=True,
+            secret=True,
+            title="API Key",
             description="API Key for [[ tap_source_name ]]",
         ),
 [%- elif tap_auth_method == "Bearer Token" %]
@@ -48,6 +52,8 @@ class Tap[[ tap_source_id ]](Tap):
             "token",
             th.StringType,
             required=True,
+            secret=True,
+            title="API Token",
             description="API Token for [[ tap_source_name ]]",
         ),
 [%- elif tap_auth_method in ("OAuth2", "JWT", "Basic Auth") %]
@@ -55,18 +61,22 @@ class Tap[[ tap_source_id ]](Tap):
             "username",
             th.StringType,
             required=True,
+            title="Username",
             description="Username in [[ tap_source_name ]]",
         ),
         th.Property(
             "password",
             th.StringType,
             required=True,
+            secret=True,
+            title="Password",
             description="Password in [[ tap_source_name ]]",
         ),
 [%- endif %]
         th.Property(
             "start_date",
             th.DateTimeType,
+            title="Start Date",
             description="Earliest datetime to get data from",
         ),
     ).to_dict()
