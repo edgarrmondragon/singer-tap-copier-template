@@ -26,16 +26,9 @@ extend = "./pyproject.toml"
 [lint]
 extend-ignore = ["TD003"]
 """
-python_versions = [
-    "3.13",
-    "3.12",
-    "3.11",
-    "3.10",
-    "3.9",
-]
 
 
-@nox.session(python=python_versions)
+@nox.session()
 @nox.parametrize("stream_type", STREAM_TYPES)
 @nox.parametrize("auth_method", AUTH_METHODS)
 @nox.parametrize("visibility", VISIBILITIES)
