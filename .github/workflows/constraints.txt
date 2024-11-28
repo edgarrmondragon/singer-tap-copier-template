@@ -1,5 +1,0 @@
-copier==9.4.1
-hatch==1.13.0
-nox==2024.10.9
-pre-commit==4.0.1
-pre-commit-uv==4.1.4

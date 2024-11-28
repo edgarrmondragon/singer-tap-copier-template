@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: pip
-    directory: "/.github/workflows"
+    directory: "/.github/workflows/tools"
     schedule:
       interval: monthly
     reviewers:
@@ -9,7 +9,7 @@ updates:
     labels:
       - "dependencies"
     groups:
-      ci-dependencies:
+      ci-tools:
         update-types:
           - "patch"
           - "minor"
@@ -23,26 +23,3 @@ updates:
       actions:
         patterns:
           - "*"
-
-# Template
-  - package-ecosystem: pip
-    directory: "/src"
-    schedule:
-      interval: monthly
-    reviewers:
-      - "edgarrmondragon"
-    labels:
-      - "dependencies"
-  - package-ecosystem: pip
-    directory: "/src/[% if repository_provider == 'github.com' %].github[% endif %]/workflows"
-    schedule:
-      interval: monthly
-    reviewers:
-      - "edgarrmondragon"
-    labels:
-      - "dependencies"
-    groups:
-      CI:
-        update-types:
-          - "patch"
-          - "minor"
