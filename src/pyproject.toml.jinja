@@ -35,12 +35,12 @@ dynamic = [
 ]
 dependencies = [
   [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
-  "requests<3,>=2",
+  "requests>=2,<3",
   [%- endif %]
   [%- if tap_auth_method == 'JWT' %]
-  "singer-sdk[jwt]~=0.42.0a2",
+  "singer-sdk[jwt]~=0.42.0",
   [%- else %]
-  "singer-sdk~=0.42.0a2",
+  "singer-sdk~=0.42.0",
   [%- endif %]
 ]
 optional-dependencies.dev = [
@@ -113,7 +113,6 @@ lint.select = [
   "ALL",
 ]
 lint.ignore = [
-  "ANN101", # missing-type-self
   "COM812", # missing-trailing-comma
   "DJ",     # flake8-django
   "FIX002", # line-contains-todo

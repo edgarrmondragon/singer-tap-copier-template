@@ -38,6 +38,13 @@ on:
   # Run weekly on Monday at 12:00 PM UTC
   - cron: "0 12 * * 1"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  FORCE_COLOR: "1"
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -67,7 +74,7 @@ jobs:
         allow-prereleases: true
     - uses: astral-sh/setup-uv@v3
       with:
-        version: "0.4.22"
+        version: ">=0.5"
 
     - name: Install Hatch
       run: |

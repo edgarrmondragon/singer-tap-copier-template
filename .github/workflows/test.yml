@@ -6,7 +6,7 @@ on:
     - src/**
     - noxfile.py
     - .github/workflows/test.yml
-    - .github/workflows/constraints.txt
+    - .github/workflows/tools/**
     - copier.yml
   push:
     branches:
@@ -15,7 +15,7 @@ on:
     - src/**
     - noxfile.py
     - .github/workflows/test.yml
-    - .github/workflows/constraints.txt
+    - .github/workflows/tools/**
     - copier.yml
   workflow_dispatch:
 
@@ -25,6 +25,7 @@ concurrency:
 
 env:
   FORCE_COLOR: "1"
+  REQUIREMENTS_DIR: ${{ github.workspace }}/.github/workflows/tools
 
 jobs:
   linting:
@@ -54,31 +55,23 @@ jobs:
     - uses: astral-sh/setup-uv@v3
 
     - name: Install copier
-      env:
-        UV_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
       run: |
-        uv tool install copier
+        uv tool install --with-requirements ${{ env.REQUIREMENTS_DIR }}/copier-requirements.txt copier
         copier --version
 
     - name: Install Hatch
-      env:
-        UV_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
       run: |
-        uv tool install hatch
+        uv tool install --with-requirements ${{ env.REQUIREMENTS_DIR }}/hatch-requirements.txt hatch
         hatch --version
 
     - name: Install Nox
-      env:
-        UV_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
       run: |
-        uv tool install nox
+        uv tool install --with-requirements ${{ env.REQUIREMENTS_DIR }}/nox-requirements.txt nox
         nox --version
 
     - name: Install pre-commit
-      env:
-        UV_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
       run: |
-        uv tool install pre-commit --with pre-commit-uv
+        uv tool install pre-commit --with-requirements ${{ env.REQUIREMENTS_DIR }}/pre-commit-requirements.txt
         pre-commit --version
 
     - name: Install dependencies
