@@ -9,6 +9,7 @@ ci:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
+    [#- renovate: datasource=github-tags depName=pre-commit/pre-commit-hooks #]
     rev: v5.0.0
     hooks:
       - id: check-json
@@ -19,11 +20,13 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/tox-dev/pyproject-fmt
+    [#- renovate: datasource=github-tags depName=tox-dev/pyproject-fmt #]
     rev: v2.5.0
     hooks:
       - id: pyproject-fmt
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
+    [#- renovate: datasource=github-tags depName=astral-sh/ruff-pre-commit #]
     rev: v0.9.1
     hooks:
       - id: ruff
@@ -33,11 +36,13 @@ repos:
         name: Ruff format
 
   - repo: https://github.com/pre-commit/pre-commit
+    [#- renovate: datasource=github-tags depName=pre-commit/pre-commit #]
     rev: v4.0.1
     hooks:
       - id: validate_manifest
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
+    [#- renovate: datasource=github-tags depName=python-jsonschema/check-jsonschema #]
     rev: 0.31.0
     hooks:
     - id: check-dependabot

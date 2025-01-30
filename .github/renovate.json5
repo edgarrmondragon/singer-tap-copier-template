@@ -6,6 +6,9 @@
     // https://docs.renovatebot.com/presets-config/#configbase
     "config:recommended",
 
+    // https://docs.renovatebot.com/presets-default/#enableprecommit
+    ":enablePreCommit",
+
     // https://docs.renovatebot.com/presets-default/#prhourlylimitnone
     ":prHourlyLimitNone",
 
@@ -28,11 +31,13 @@
   // https://docs.renovatebot.com/configuration-options/#reviewers
   "reviewers": ["edgarrmondragon"],
 
-  "pre-commit": {
-    "enabled": true,
-    "fileMatch": [
-      // Support optional additional .jinja extension
-      "(^|/)\\.pre-commit-config\\.ya?ml(\\.jinja)?$",
-    ],
-  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["src/\\.pre-commit-config\\.yaml\\.jinja"],
+      "matchStrings": [
+        "\\[#- renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) #\\]\\s+rev: \"?(?<currentValue>\\S+?)\"?\\s+"
+      ]
+    }
+  ],
 }
