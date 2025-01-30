@@ -25,11 +25,22 @@ concurrency:
 
 env:
   FORCE_COLOR: "1"
-  REQUIREMENTS_DIR: ${{ github.workspace }}/.github/workflows/tools
+  # renovate: datasource=pypi depName=copier
+  COPIER_VERSION: 9.4.1
+  # renovate: datasource=pypi depName=hatch
+  HATCH_VERSION: 1.14.0
+  # renovate: datasource=pypi depName=nox
+  NOX_VERSION: 2024.10.9
+  # renovate: datasource=pypi depName=pre-commit
+  PRE_COMMIT_VERSION: 4.0.1
+  # renovate: datasource=pypi depName=pre-commit-uv
+  PRE_COMMIT_UV_VERSION: 4.1.4
+  # renovate: datasource=pypi depName=uv
+  UV_VERSION: 0.5.25
 
 jobs:
   linting:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -44,34 +55,36 @@ jobs:
         - "Custom or N/A"
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       with:
         fetch-depth: 0
 
-    - uses: actions/setup-python@v5
+    - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
       with:
         python-version: 3.x
 
-    - uses: astral-sh/setup-uv@v5
+    - uses: astral-sh/setup-uv@b5f58b2abc5763ade55e4e9d0fe52cd1ff7979ca # v5.2.1
+      with:
+        version: ${{ env.UV_VERSION }}
 
     - name: Install copier
       run: |
-        uv tool install --with-requirements ${{ env.REQUIREMENTS_DIR }}/copier-requirements.txt copier
+        uv tool install --with copier==${{ env.COPIER_VERSION }} copier
         copier --version
 
     - name: Install Hatch
       run: |
-        uv tool install --with-requirements ${{ env.REQUIREMENTS_DIR }}/hatch-requirements.txt hatch
+        uv tool install --with hatch==${{ env.HATCH_VERSION }} hatch
         hatch --version
 
     - name: Install Nox
       run: |
-        uv tool install --with-requirements ${{ env.REQUIREMENTS_DIR }}/nox-requirements.txt nox
+        uv tool install --with nox==${{ env.NOX_VERSION }} nox
         nox --version
 
     - name: Install pre-commit
       run: |
-        uv tool install pre-commit --with-requirements ${{ env.REQUIREMENTS_DIR }}/pre-commit-requirements.txt
+        uv tool install --with pre-commit-uv==${{ env.PRE_COMMIT_UV_VERSION }} --with pre-commit==${{ env.PRE_COMMIT_VERSION }} pre-commit
         pre-commit --version
 
     - name: Install dependencies

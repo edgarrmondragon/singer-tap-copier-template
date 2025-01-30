@@ -47,7 +47,7 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       FORCE_COLOR: "1"
       PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
@@ -94,7 +94,7 @@ jobs:
 [%- if repository_visibility == 'private' %]
 
   pre-commit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       FORCE_COLOR: "1"
     steps:
