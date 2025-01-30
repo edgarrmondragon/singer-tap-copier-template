@@ -6,9 +6,6 @@
     // https://docs.renovatebot.com/presets-config/#configbase
     "config:recommended",
 
-    // https://docs.renovatebot.com/presets-default/#enableprecommit
-    ":enablePreCommit",
-
     // https://docs.renovatebot.com/presets-default/#prhourlylimitnone
     ":prHourlyLimitNone",
 
@@ -32,6 +29,7 @@
   "reviewers": ["edgarrmondragon"],
 
   "pre-commit": {
+    "enabled": true,
     "fileMatch": [
       // Support optional additional .jinja extension
       "(^|/)\\.pre-commit-config\\.ya?ml(\\.jinja)?$",
