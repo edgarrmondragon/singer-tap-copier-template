@@ -30,4 +30,11 @@
 
   // https://docs.renovatebot.com/configuration-options/#reviewers
   "reviewers": ["edgarrmondragon"],
+
+  "pre-commit": {
+    "fileMatch": [
+      // Support optional additional .jinja extension
+      "(^|/)\\.pre-commit-config\\.ya?ml(\\.jinja)?$",
+    ],
+  },
 }
