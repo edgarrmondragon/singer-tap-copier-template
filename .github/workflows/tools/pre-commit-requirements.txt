@@ -1,2 +1,0 @@
-pre-commit==4.0.1
-pre-commit-uv==4.1.4
