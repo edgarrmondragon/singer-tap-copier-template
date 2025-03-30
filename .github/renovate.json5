@@ -13,14 +13,14 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["src/pyproject\\.toml\\.jinja"],
+      "fileMatch": ["^src/pyproject\\.toml\\.jinja$"],
       "matchStrings": [
         "\\[#- renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) #\\]\\s+\\[%- set [A-Za-z0-9_]+?_VERSION\\s*:=\\s*[\"']?(?<currentValue>.+?)[\"']? -%\\]\\s"
       ]
     },
     {
       "customType": "regex",
-      "fileMatch": ["src/\\.pre-commit-config\\.yaml\\.jinja"],
+      "fileMatch": ["^src/\\.pre-commit-config\\.yaml\\.jinja$"],
       "matchStrings": [
         "\\[#- renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) #\\]\\s+rev: \"?(?<currentValue>\\S+?)\"?\\s+"
       ]
