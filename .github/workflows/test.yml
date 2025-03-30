@@ -24,7 +24,7 @@ concurrency:
 env:
   FORCE_COLOR: "1"
   # renovate: datasource=pypi depName=copier
-  COPIER_VERSION: 9.4.1
+  COPIER_VERSION: 9.6.0
   # renovate: datasource=pypi depName=hatch
   HATCH_VERSION: 1.14.0
   # renovate: datasource=pypi depName=nox
