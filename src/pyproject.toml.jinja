@@ -47,69 +47,30 @@ dependencies = [
   "singer-sdk~=[[ SINGER_SDK_VERSION ]]",
   [%- endif %]
 ]
-optional-dependencies.dev = [
-  "[[ tap_package_distribution_name ]][testing,typing]",
-]
-optional-dependencies.testing = [
-  "deptry>=0.12",
-  "pytest>=8",
-  "singer-sdk[testing]",
-]
-optional-dependencies.typing = [
-  "mypy",
-  [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
-  "types-requests",
-  [%- endif %]
-]
 urls.Documentation = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]#readme"
 urls.Homepage = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
 urls.Repository = "https://[[ repository_provider ]]/[[ repository_namespace ]]/[[ repository_name ]]"
 scripts."[[ tap_package_command_line_name ]]" = "[[ tap_package_import_name ]].tap:Tap[[ tap_source_id ]].cli"
 
+[dependency-groups]
+dev = [
+  { include-group = "testing" },
+  { include-group = "typing" },
+]
+testing = [
+  "deptry>=0.12",
+  "pytest>=8",
+  "singer-sdk[testing]",
+]
+typing = [
+  "mypy",
+  [%- if tap_stream_type == 'GraphQL' or tap_auth_method == 'Basic Auth' %]
+  "types-requests",
+  [%- endif %]
+]
+
 [tool.hatch.version]
 source = "vcs"
-
-[tool.hatch.envs.default]
-installer = "uv"
-
-[tool.hatch.envs.default.env-vars]
-UV_PRERELEASE = "allow"
-
-[tool.hatch.envs.default.overrides]
-env.GITHUB_ACTIONS.dev-mode = { value = false, if = [
-  "true",
-] }
-
-[tool.hatch.envs.sync.scripts]
-console = "[[ tap_package_command_line_name ]] {args}"
-jsonl = "[[ tap_package_command_line_name ]] {args} > [[ tap_package_distribution_name ]].jsonl"
-
-[tool.hatch.envs.test]
-features = [
-  "testing",
-]
-[tool.hatch.envs.test.scripts]
-integration = "pytest {args:tests}"
-dependencies = "deptry ."
-
-[tool.hatch.envs.all]
-template = "test"
-[% raw %][[tool.hatch.envs.all.matrix]][% endraw %]
-python = [
-  "3.9",
-  "3.10",
-  "3.11",
-  "3.12",
-  "3.13",
-]
-
-[tool.hatch.envs.typing]
-features = [
-  "testing",
-  "typing",
-]
-[tool.hatch.envs.typing.scripts]
-check = "mypy --strict {args:[[ tap_package_import_name ]] tests}"
 
 [tool.ruff]
 line-length = 88
@@ -142,16 +103,7 @@ lint.pydocstyle.convention = "google"
 
 [tool.deptry.package_module_name_map]
 mypy = "mypy"
-pytest = "pytest"
-[[ tap_package_distribution_name ]] = "[[ tap_package_import_name ]]"
 types-requests = "requests"
-
-[tool.deptry.per_rule_ignores]
-DEP002 = [
-  "deptry",
-  "mypy",
-  "pytest",
-]
 
 [tool.pyproject-fmt]
 max_supported_python = "3.13"
@@ -172,3 +124,6 @@ ignore_missing_imports = true
 module = [
   "backoff.*",
 ]
+
+[tool.uv]
+required-version = ">=0.6"

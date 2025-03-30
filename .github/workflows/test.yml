@@ -25,14 +25,16 @@ env:
   FORCE_COLOR: "1"
   # renovate: datasource=pypi depName=copier
   COPIER_VERSION: 9.6.0
-  # renovate: datasource=pypi depName=hatch
-  HATCH_VERSION: 1.14.0
   # renovate: datasource=pypi depName=nox
   NOX_VERSION: 2025.2.9
   # renovate: datasource=pypi depName=pre-commit
   PRE_COMMIT_VERSION: 4.2.0
   # renovate: datasource=pypi depName=pre-commit-uv
   PRE_COMMIT_UV_VERSION: 4.1.4
+  # renovate: datasource=pypi depName=tox
+  TOX_VERSION: 4.25.0
+  # renovate: datasource=pypi depName=tox-uv
+  TOX_UV_VERSION: 1.25.0
   # renovate: datasource=pypi depName=uv
   UV_VERSION: 0.6.9
 
@@ -70,15 +72,15 @@ jobs:
         uv tool install --with copier==${{ env.COPIER_VERSION }} copier
         copier --version
 
-    - name: Install Hatch
-      run: |
-        uv tool install --with hatch==${{ env.HATCH_VERSION }} hatch
-        hatch --version
-
     - name: Install Nox
       run: |
         uv tool install --with nox==${{ env.NOX_VERSION }} nox
         nox --version
+
+    - name: Install Tox
+      run: |
+        uv tool install --with tox-uv==${{ env.TOX_UV_VERSION }} --with tox==${{ env.TOX_VERSION }} tox
+        tox --version
 
     - name: Install pre-commit
       run: |

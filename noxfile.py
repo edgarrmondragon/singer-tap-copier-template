@@ -7,7 +7,7 @@ from tempfile import TemporaryDirectory
 
 import nox
 
-nox.needs_version = ">=2024.4.15"
+nox.needs_version = ">=2025.2.9"
 nox.options.default_venv_backend = "uv|virtualenv"
 
 STREAM_TYPES = ["REST", "GraphQL"]
@@ -69,7 +69,8 @@ def lint(
         with session.cd(tmpdir):
             session.run("git", "init", external=True)
             session.run("git", "add", ".", external=True)
-            session.run("hatch", "run", "test:dependencies", external=True)
-            session.run("hatch", "run", "typing:check", external=True)
+            session.run("uv", "lock")
+            session.run("tox", "-e", "dependencies", external=True)
+            session.run("tox", "-e", "typing", external=True)
             session.run("cat", "pyproject.toml", external=True)
             session.run("pre-commit", "run", "--all", external=True)

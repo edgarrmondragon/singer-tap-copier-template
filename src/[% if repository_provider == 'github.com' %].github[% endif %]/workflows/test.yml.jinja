@@ -44,26 +44,28 @@ concurrency:
 
 env:
   FORCE_COLOR: "1"
+  # renovate: datasource=pypi depName=tox
+  TOX_VERSION: 4.25.0
+  # renovate: datasource=pypi depName=tox-uv
+  TOX_UV_VERSION: 1.25.0
+  # renovate: datasource=pypi depName=uv
+  UV_VERSION: "0.6.9"
 
 jobs:
   test:
     runs-on: ubuntu-24.04
-    env:
-      FORCE_COLOR: "1"
-      PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
     strategy:
       fail-fast: false
       matrix:
-        script: ["test:integration"]
         python-version:
-        - "3.9"
-        - "3.10"
-        - "3.11"
-        - "3.12"
         - "3.13"
+        - "3.12"
+        - "3.11"
+        - "3.10"
+        - "3.9"
         include:
-        - { script: "test:dependencies", python-version: "3.x" }
-        - { script: "typing:check",      python-version: "3.x" }
+        - { environment: "dependencies", python-version: "3.x" }
+        - { environment: "typing",       python-version: "3.x" }
 
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -74,29 +76,24 @@ jobs:
         allow-prereleases: true
     - uses: astral-sh/setup-uv@0c5e2b8115b80b4c7c5ddf6ffdd634974642d182 # v5.4.1
       with:
-        version: ">=0.5"
-
-    - name: Install Hatch
-      run: |
-        uv tool install hatch
-        hatch --version
+        version: "${{ env.UV_VERSION }}"
 
     - name: Run tests
       env:
-        HATCH_PYTHON: ${{ steps.setup-python.outputs.python-path }}
-        HATCH_VERBOSE: "1"
+        UV_PYTHON: ${{ steps.setup-python.outputs.python-path }}
         [%- for env in passenv %]
         [[ env ]]: ${{ secrets.[[ env ]] }}
         [%- endfor %]
-      run: |
-        hatch run ${{ matrix.script }}
+      run: >
+        uvx
+        --with tox-uv==${{ env.TOX_UV_VERSION }}
+        --with tox==${{ env.TOX_VERSION }}
+        tox -e ${{ matrix.environment || matrix.python-version }}
 
 [%- if repository_visibility == 'private' %]
 
   pre-commit:
     runs-on: ubuntu-24.04
-    env:
-      FORCE_COLOR: "1"
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
     - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5.5.0
