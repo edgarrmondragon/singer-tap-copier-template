@@ -15,7 +15,7 @@
       "customType": "regex",
       "fileMatch": ["^src/pyproject\\.toml\\.jinja$"],
       "matchStrings": [
-        "\\[#- renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) #\\]\\s+\\[%- set [A-Za-z0-9_]+?_VERSION\\s*:=\\s*[\"']?(?<currentValue>.+?)[\"']? -%\\]\\s"
+        "\\[#- renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) #\\]\\s+\\[%- set [A-Za-z0-9_]+?_VERSION\\s*=\\s*[\"']?(?<currentValue>.+?)[\"']? -%\\]\\s"
       ]
     },
     {
