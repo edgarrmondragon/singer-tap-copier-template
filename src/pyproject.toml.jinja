@@ -1,3 +1,6 @@
+[#- renovate: datasource=pypi depName=singer-sdk #]
+[%- set SINGER_SDK_VERSION = "0.43.1"-%]
+
 [build-system]
 build-backend = "hatchling.build"
 requires = [
@@ -39,9 +42,9 @@ dependencies = [
   "requests>=2,<3",
   [%- endif %]
   [%- if tap_auth_method == 'JWT' %]
-  "singer-sdk[jwt]~=0.43.1",
+  "singer-sdk[jwt]~=[[ SINGER_SDK_VERSION ]]",
   [%- else %]
-  "singer-sdk~=0.43.1",
+  "singer-sdk~=[[ SINGER_SDK_VERSION ]]",
   [%- endif %]
 ]
 optional-dependencies.dev = [
