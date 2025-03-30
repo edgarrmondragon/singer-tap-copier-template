@@ -3,7 +3,7 @@
 
   // https://docs.renovatebot.com/configuration-options/#extends
   "extends": [
-    // https://github.com/edgarrmondragon/.github/blob/main/renovate/uv.json5
+    // https://github.com/edgarrmondragon/.github/blob/main/renovate/base.json5
     "edgarrmondragon/.github//renovate/base.json5",
   ],
 
