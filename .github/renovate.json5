@@ -13,7 +13,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["pyproject\\.toml\\.jinja"],
+      "fileMatch": ["src/pyproject\\.toml\\.jinja"],
       "matchStrings": [
         "\\[#- renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) #\\]\\s+\\[%- set [A-Za-z0-9_]+?_VERSION\\s*:=\\s*[\"']?(?<currentValue>.+?)[\"']? -%\\]\\s"
       ]
