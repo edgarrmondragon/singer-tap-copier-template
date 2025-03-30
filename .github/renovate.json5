@@ -1,0 +1,29 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  // https://docs.renovatebot.com/configuration-options/#extends
+  "extends": [
+    // https://github.com/edgarrmondragon/.github/blob/main/renovate/base.json5
+    "edgarrmondragon/.github//renovate/base.json5",
+  ],
+
+  // https://docs.renovatebot.com/configuration-options/#reviewers
+  "reviewers": ["edgarrmondragon"],
+
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^src/pyproject\\.toml\\.jinja$"],
+      "matchStrings": [
+        "\\[#- renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) #\\]\\s+\\[%- set [A-Za-z0-9_]+?_VERSION\\s*:=\\s*[\"']?(?<currentValue>.+?)[\"']? -%\\]\\s"
+      ]
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^src/\\.pre-commit-config\\.yaml\\.jinja$"],
+      "matchStrings": [
+        "\\[#- renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) #\\]\\s+rev: \"?(?<currentValue>\\S+?)\"?\\s+"
+      ]
+    },
+  ],
+}
